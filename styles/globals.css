@@ -22,7 +22,15 @@ h2 {
   color: white;
   font-size: 14px;
 }
-
+.css-igs3ac {
+  border-color: #454444 !important;
+}
+.css-u9osun {
+  color: white !important;
+}
+.css-u9osun.Mui-focused {
+  color: #F80595;
+}
 h3 {
   color: white;
   font-size: 14px;
