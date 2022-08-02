@@ -388,7 +388,7 @@ const EditProductModal: React.FC<EditProductModalType> = ({ visible, setVisible,
             return
         }
         const list = [...inputList];
-        list[index][name] = parseInt(newP);
+        list[index][name] =  newP;
         setInputList(list);
     };
 

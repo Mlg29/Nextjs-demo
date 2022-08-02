@@ -27,7 +27,7 @@ function DesktopStoreInformation() {
     const router = useRouter()
     const activeId = typeof window !== "undefined" ? localStorage?.getItem("activeId") : null
     const [openCrop, setOpenCrop] = useState(false)
-    const [photoUrl, setPhotoUrl] = useState()
+    const [photoUrl, setPhotoUrl] = useState("")
     const [file, setFile] = useState(null)
     const [imageUrl, setImageUrl] = useState(storebyIdData?.imgUrl)
 
@@ -213,7 +213,7 @@ function DesktopStoreInformation() {
 
             <ToastContainer />
 
-            {openCrop && <CropEasy {...{ photoUrl, setOpenCrop, openCrop, setPhotoUrl, setFile, setImageUrl, multiple: false }} />}
+            {openCrop && <CropEasy {...{ photoUrl, setOpenCrop, openCrop, setPhotoUrl, setFile,multipleUpload: "", setMultipleUpload: "", setImageUrl, multiple: false, dummyUploadImage: "", setDummyUploadImage: ""  }} />}
         </ContainerBox>
     )
 }

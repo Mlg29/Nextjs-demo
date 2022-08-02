@@ -42,7 +42,7 @@ const MerchantSteps = () => {
     const [errorTitle, setErrorTitle] = useState("")
     const [errorVisible, setErrorVisible] = useState(false)
     const [openCrop, setOpenCrop] = useState(false)
-    const [photoUrl, setPhotoUrl] = useState()
+    const [photoUrl, setPhotoUrl] = useState("")
     const [file, setFile] = useState(null)
     const [imageUrl, setImageUrl] = useState(null)
     const storebyIds = useAppSelector(storebyId)
@@ -53,7 +53,7 @@ const MerchantSteps = () => {
     const [codes,setCodes] = useState('')
     const urlStep = router?.query?.steps
     const payout = useAppSelector(payouts)
-    const activeStep = parseInt(urlStep)
+    const activeStep = +urlStep
     const activeId = typeof window !== 'undefined' ? localStorage.getItem('activeId') : null
     const merchantSlug = typeof window !== 'undefined' ? localStorage.getItem('merchant-slug') : null
 
@@ -482,7 +482,7 @@ const MerchantSteps = () => {
                 setModalVisible={handleModalClose}
                 handlePress={handleModalClose}
             />
-            {openCrop && <CropEasy {...{ photoUrl, setOpenCrop, openCrop, setPhotoUrl, setFile, setImageUrl }} />}
+            {openCrop && <CropEasy {...{ photoUrl, setOpenCrop, openCrop, setPhotoUrl, setFile, setImageUrl, multiple: false, multipleUpload: "", setMultipleUpload: "", dummyUploadImage: "", setDummyUploadImage: ""  }} />}
         </>
     )
 }

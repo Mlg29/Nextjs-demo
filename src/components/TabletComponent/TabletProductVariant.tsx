@@ -187,7 +187,7 @@ function TabletProductVariant() {
         if (multipleUpload?.length > 0 && price >= 500) {
             await colorList?.push({
                 image: multipleUpload,
-                price: parseInt(price),
+                price: price,
                 quantity: quantity,
             })
         }
@@ -713,7 +713,7 @@ function TabletProductVariant() {
 
         await setColorList([...colorList, {
             image: multipleUpload,
-            price: parseInt(price),
+            price: price,
             quantity: quantity,
         }])
 
@@ -1219,9 +1219,9 @@ function TabletProductVariant() {
     </ContainDiv>
 </Contain>
 
-            {openCrop && <CropEasy {...{ photoUrl, setOpenCrop, openCrop, setPhotoUrl, setFile, setImageUrl, setMultipleUpload, multipleUpload, multiple }} />}
+            {openCrop && <CropEasy {...{ photoUrl, setOpenCrop, openCrop, setPhotoUrl, setFile, setImageUrl, setMultipleUpload, multipleUpload, multiple, dummyUploadImage: "", setDummyUploadImage: ""  }} />}
 
-            {collapOpenCrop && <CropEasy {...{ photoUrl: collapPhotoUrl, setOpenCrop: setCollapOpenCrop, openCrop: collapOpenCrop, setPhotoUrl: setCollapPhotoUrl, setFile: setCollapFile, setImageUrl: setCollapImageUrl, setMultipleUpload, multipleUpload, multiple: false }} />}
+            {collapOpenCrop && <CropEasy {...{ photoUrl: collapPhotoUrl, setOpenCrop: setCollapOpenCrop, openCrop: collapOpenCrop, setPhotoUrl: setCollapPhotoUrl, setFile: setCollapFile, setImageUrl: setCollapImageUrl, setMultipleUpload, multipleUpload, multiple: false, dummyUploadImage: "", setDummyUploadImage: ""  }} />}
 
             <ToastContainer />
         </Container>

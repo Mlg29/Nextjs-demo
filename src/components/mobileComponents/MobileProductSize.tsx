@@ -28,7 +28,7 @@ const MobileProductSize = () => {
     const [loader, setLoader] = useState(false)
     const [quantity, setQuantity] = useState(0)
     const [openCrop, setOpenCrop] = useState(false)
-    const [photoUrl, setPhotoUrl] = useState()
+    const [photoUrl, setPhotoUrl] = useState("")
     const [file, setFile] = useState(null)
     const [imageUrl, setImageUrl] = useState([])
     const [multiple, setMultiple] = useState(true)
@@ -131,7 +131,7 @@ const MobileProductSize = () => {
 
                     {
                         dummyUploadImage.filter((a, b) => multipleUpload?.length < b + 1).map((data, i) => {
-                            return <UploadComponent key={i} index={i} profileImageChange={profileImageChange} />
+                            return <UploadComponent key={i} profileImageChange={profileImageChange} />
                         })
                     }
                 </Grid>
@@ -178,7 +178,7 @@ const MobileProductSize = () => {
                 <Button isLoading={loader} children={"Publish"} handlePress={handleSubmit} />
             </BottomContainer>
 
-            {openCrop && <CropEasy {...{ photoUrl, setOpenCrop, openCrop, setPhotoUrl, setFile, setImageUrl, setMultipleUpload, multipleUpload, multiple }} />}
+            {openCrop && <CropEasy {...{ photoUrl, setOpenCrop, openCrop, setPhotoUrl, setFile, setImageUrl, setMultipleUpload, multipleUpload, multiple, dummyUploadImage: "", setDummyUploadImage: ""  }} />}
 
 
             <Modal title={null} closable={false} footer={null} visible={isModalVisible} onOk={handleCancel} onCancel={handleCancel}>

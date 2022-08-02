@@ -36,7 +36,7 @@ function DesktopProductVariant() {
     const router = useRouter()
     const [price, setPrice] = useState<number>(0)
     const [openCrop, setOpenCrop] = useState(false)
-    const [photoUrl, setPhotoUrl] = useState<any>()
+    const [photoUrl, setPhotoUrl] = useState<any>("")
     const [file, setFile] = useState(null)
     const [collapOpenCrop, setCollapOpenCrop] = useState(false)
     const [collapPhotoUrl, setCollapPhotoUrl] = useState<any>()
@@ -187,7 +187,7 @@ function DesktopProductVariant() {
         if (multipleUpload?.length > 0 && price >= 500) {
             await colorList?.push({
                 image: multipleUpload,
-                price: parseInt(price),
+                price: price,
                 quantity: quantity,
             })
         }
@@ -713,7 +713,7 @@ function DesktopProductVariant() {
 
         await setColorList([...colorList, {
             image: multipleUpload,
-            price: parseInt(price),
+            price: price,
             quantity: quantity,
         }])
 
@@ -1220,9 +1220,9 @@ function DesktopProductVariant() {
                 </ContainDiv>
             </Contain>
 
-            {openCrop && <CropEasy {...{ photoUrl, setOpenCrop, openCrop, setPhotoUrl, setFile, setImageUrl, setMultipleUpload, multipleUpload, multiple }} />}
+            {openCrop && <CropEasy {...{ photoUrl, setOpenCrop, openCrop, setPhotoUrl, setFile, setImageUrl, setMultipleUpload, multipleUpload, multiple,  dummyUploadImage: "", setDummyUploadImage: ""  }} />}
 
-            {collapOpenCrop && <CropEasy {...{ photoUrl: collapPhotoUrl, setOpenCrop: setCollapOpenCrop, openCrop: collapOpenCrop, setPhotoUrl: setCollapPhotoUrl, setFile: setCollapFile, setImageUrl: setCollapImageUrl, setMultipleUpload, multipleUpload, multiple: false }} />}
+            {collapOpenCrop && <CropEasy {...{ photoUrl: collapPhotoUrl, setOpenCrop: setCollapOpenCrop, openCrop: collapOpenCrop, setPhotoUrl: setCollapPhotoUrl, setFile: setCollapFile, setImageUrl: setCollapImageUrl, setMultipleUpload, multipleUpload, multiple: false, dummyUploadImage: "", setDummyUploadImage: ""  }} />}
 
             <ToastContainer />
         </Container>

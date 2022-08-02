@@ -38,7 +38,7 @@ const MobileCreateStore = () => {
     const router = useRouter()
 
     const [openCrop, setOpenCrop] = useState(false)
-    const [photoUrl, setPhotoUrl] = useState()
+    const [photoUrl, setPhotoUrl] = useState("")
     const [file, setFile] = useState(null)
     const [imageUrl, setImageUrl] = useState(null)
 
@@ -222,7 +222,7 @@ const MobileCreateStore = () => {
                 handlePress={handleModalClose}
             />
 
-            {openCrop && <CropEasy {...{ photoUrl, setOpenCrop, openCrop, setPhotoUrl, setFile, setImageUrl, multiple: false }} />}
+            {openCrop && <CropEasy {...{ photoUrl, setOpenCrop, openCrop, setPhotoUrl, setFile, setImageUrl,multipleUpload: "", setMultipleUpload: "", multiple: false,dummyUploadImage: "", setDummyUploadImage: ""  }} />}
         </Container>
     )
 }

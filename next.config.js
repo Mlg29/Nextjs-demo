@@ -11,6 +11,9 @@
 
 const nextConfig = {
   reactStrictMode: false,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   swcMinify: true,
   env: {
     REACT_APP_NODE_ENV: "STAGING",

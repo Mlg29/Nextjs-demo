@@ -189,7 +189,7 @@ const ProductModal: React.FC<ProductModalType> = ({ visible, setVisible, action 
         if (multipleUpload?.length > 0 && price >= 500) {
             await colorList?.push({
                 image: multipleUpload,
-                price: parseInt(price),
+                price: price,
                 quantity: quantity,
             })
         }
@@ -507,7 +507,7 @@ const ProductModal: React.FC<ProductModalType> = ({ visible, setVisible, action 
             return
         }
         const list = [...inputList];
-        list[index][name] = parseInt(newP);
+        list[index][name] = newP;
         setInputList(list);
     };
 
@@ -763,7 +763,7 @@ const ProductModal: React.FC<ProductModalType> = ({ visible, setVisible, action 
 
         await setColorList([...colorList, {
             image: multipleUpload,
-            price: parseInt(price),
+            price: price,
             quantity: quantity,
         }])
 
