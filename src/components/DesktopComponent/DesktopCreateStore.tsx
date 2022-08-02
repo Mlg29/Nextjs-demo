@@ -57,6 +57,7 @@ const DesktopCreateStore = () => {
             category: "Men's Clothing",
             brandName: data.storeName,
             description: data.description,
+            phoneNumber: data.phoneNumber,
             imgUrl: imageUrl,
             address: data.street + " " + data.city + " " + data.state,
             shippingFees: {
