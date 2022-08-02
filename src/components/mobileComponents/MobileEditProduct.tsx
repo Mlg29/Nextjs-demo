@@ -38,7 +38,8 @@ function MobileEditProduct() {
 
 
 
-    const productSlug = router?.query?.id
+    const productSlug = router?.query?.id as string
+
 
     const id = typeof window !== "undefined" ? localStorage?.getItem("activeId") : null
 
@@ -67,6 +68,7 @@ function MobileEditProduct() {
             description: data?.productDescription,
             categories: data?.category,
             isDraft: false,
+            status: 'active',
             variants: productVariantList
         }
 

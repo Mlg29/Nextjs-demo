@@ -14,6 +14,9 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  typescript: {
+    ignoreDuringBuilds: true,
+  },
   swcMinify: true,
   env: {
     REACT_APP_NODE_ENV: "STAGING",

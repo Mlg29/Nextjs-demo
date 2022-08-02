@@ -102,6 +102,7 @@ function MobileSettings() {
       imgUrl: storeInfo?.imgUrl,
       address: storeInfo?.location?.street + " " + storeInfo?.location?.city + " " + storeInfo?.location?.state,
       phoneNumber: storeInfo.phoneNumber,
+      isDraft: false,
       status: checked ? 'active' : 'inactive',
       location: {
         state: storeInfo?.location?.state,

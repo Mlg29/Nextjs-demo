@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { } from "./Styled"
+
 import { windowWidth } from '../../utils/windowWidth'
 import MobileLogin from '../../components/mobileComponents/MobileLogin'
 import DesktopLogin from '../../components/DesktopComponent/DesktopLogin'

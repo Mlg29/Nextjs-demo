@@ -26,7 +26,7 @@ function MobileProductDetail() {
 
 
 
-    const productSlug = router?.query?.id
+    const productSlug = router?.query?.id as string
 
     const id = typeof window !== "undefined" ? localStorage?.getItem("activeId") : null
 
