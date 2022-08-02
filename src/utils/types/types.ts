@@ -246,6 +246,11 @@ export type EditProductModalType = {
     editData?: any
 }
 
+export type AddStaffModalType = {
+    staffModalVisible: boolean, 
+    closeModal: () => void,
+}
+
 
 export type ImageType = {
     source: string;
