@@ -12,7 +12,7 @@ import Image from 'next/image'
 import { DownOutlined } from '@ant-design/icons'
 import { getSellerOrders } from '../../../../slices/OrderSlice'
 import { getProduct } from '../../../../slices/ProductSlice'
-import { getStaff } from '../../../../slices/StaffSlice'
+import { getAssignedStoresRole, getStaff, storeRolesList } from '../../../../slices/StaffSlice'
 import ImageContainer from '../../../Image'
 
 
@@ -21,6 +21,7 @@ const DesktopSidebar = () => {
   const dispatch = useAppDispatch()
   const myStoreList = useAppSelector(myStore)
   const storeData = useAppSelector(storebyId)
+  const myStoreRoles = useAppSelector(storeRolesList)
   const [open, setOpen] = useState(false)
 
 
@@ -29,6 +30,31 @@ const DesktopSidebar = () => {
 
   const id = localStorage.getItem('activeId')
   const brandName = localStorage.getItem('activeName')
+
+  const allStore = myStoreRoles?.map(data => {
+    return data?.sidehustle?.status === 'active' && {
+      id: data?.sidehustle?.id,
+      brandName: data?.sidehustle?.brandName,
+      status: data?.sidehustle?.status,
+      role: data?.role,
+      imgUrl: data?.sidehustle?.imgUrl
+
+    }
+  })
+
+  const storeAddedTo = myStoreList?.map((data, i) => {
+    return data?.status === 'active' && i < 3 && {
+      id: data?.id,
+      brandName: data?.brandName,
+      status: data?.status,
+      role: "Owner",
+      imgUrl: data?.imgUrl
+    }
+  })
+
+  const ActiveStores = storeAddedTo?.concat(allStore)
+
+
 
   const changeStore = (item) => {
     localStorage.setItem('activeId', item?.id)
@@ -44,13 +70,13 @@ const DesktopSidebar = () => {
     dispatch(getStoreById(id))
   }
 
-  const choosenList = myStoreList?.filter((aa, i) => i < 3)
+
 
   const menu = (
     <MenuDiv>
       <Paragraph text="Your Store" />
       {
-        choosenList?.map((data, i) => {
+        ActiveStores?.filter((n, i) => n && i <= 3)?.map((data, i) => {
           return <View2 key={i} onClick={() => changeStore(data)}>
             <ImageContainer source={data?.imgUrl} type='round' width={20} height={20} />
             {data?.id === id && <ActiveBox></ActiveBox>}
@@ -60,7 +86,7 @@ const DesktopSidebar = () => {
         })
       }
       {
-        choosenList?.length < 3 && <Menu.Item onClick={() => router.push('/merchant-store-creation/0')}><Paragraph text={"Add Store"} color={GlobalStyle.color.bazaraTint} /></Menu.Item>
+        ActiveStores?.filter((n) => n)?.length < 3 && <Menu.Item onClick={() => router.push('/merchant-store-creation/0')}><Paragraph text={"Add Store"} color={GlobalStyle.color.bazaraTint} /></Menu.Item>
       }
     </MenuDiv>
 
@@ -77,6 +103,7 @@ const DesktopSidebar = () => {
   useEffect(() => {
     dispatch(getPersonalStore())
     dispatch(getStoreById(id))
+    dispatch(getAssignedStoresRole())
   }, [id])
 
   return (
