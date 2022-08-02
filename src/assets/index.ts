@@ -62,7 +62,7 @@ export const pic: StaticImageData = require('../assets/Image 2.svg');
 export const card1: StaticImageData = require('../assets/card1.svg');
 export const card2: StaticImageData = require('../assets/card2.svg');
 export const card3: StaticImageData = require('../assets/card3.svg');
-
+export const pVector: StaticImageData = require('../assets/p-vector.svg');
 export const lock: StaticImageData = require('../assets/lock.svg');
 export const unlock: StaticImageData = require('../assets/unlock.svg');
 export const ord: StaticImageData = require('../assets/ord.svg');

@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import { useRouter } from 'next/router'
 import Paragraph from '../Paragraph'
 import { GlobalStyle } from '../../utils/themes/themes'
-import { bank, blueUni, blueUser, groupUser, store, truck } from '../../assets'
+import { bank, blueUni, blueUser, groupUser, pVector, store, truck } from '../../assets'
 import { ArrayOptionType } from '../../utils/types/types'
 import ListCard from './reusable/ListCard'
 import { Switch } from 'antd'
@@ -82,13 +82,13 @@ function MobileSettings() {
     {
       id: 1,
       title: "Profile",
-      icon: blueUser,
+      icon: pVector,
       route: 'profile'
     },
     {
       id: 2,
       title: "Payout Bank Account",
-      icon: blueUni,
+      icon: bank,
       route: 'payout'
     }
 

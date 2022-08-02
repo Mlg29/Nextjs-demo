@@ -53,7 +53,10 @@ const ProductModal: React.FC<ProductModalType> = ({ visible, setVisible, action 
     const [collapImageUrl, setCollapImageUrl] = useState([])
     const [multiple, setMultiple] = useState(true)
     const [multipleUpload, setMultipleUpload] = useState([])
-    const [productInDraft, setProductInDraft] = useState(null)
+    const [productInDraft, setProductInDraft] = useState({
+        isColor: false,
+        isSize: false,
+    })
     const [sizeList, setSizeList] = useState(sizes)
     const [quantity, setQuantity] = useState(1)
     const [dummyUploadImage, setDummyUploadImage] = useState([""])
@@ -123,7 +126,10 @@ const ProductModal: React.FC<ProductModalType> = ({ visible, setVisible, action 
                 setDummyUploadImage([""])
                 setQuantity(1)
                 setGetSlug("")
-                setProductInDraft(null)
+                setProductInDraft({
+                    isColor: false,
+                    isSize: false,
+                })
                 setStep(0)
                 setProductSlug(null)
                 localStorage.removeItem('colorVariety')
@@ -228,7 +234,10 @@ const ProductModal: React.FC<ProductModalType> = ({ visible, setVisible, action 
                 setDummyUploadImage([""])
                 setQuantity(1)
                 setGetSlug("")
-                setProductInDraft(null)
+                setProductInDraft({
+                    isColor: false,
+                    isSize: false,
+                })
                 setStep(0)
                 setProductSlug(null)
                 localStorage.removeItem('colorVariety')
@@ -706,7 +715,10 @@ const ProductModal: React.FC<ProductModalType> = ({ visible, setVisible, action 
                 setQuantity(1)
                 // resetForm()
                 setGetSlug("")
-                setProductInDraft(null)
+                setProductInDraft({
+                    isColor: false,
+                    isSize: false,
+                })
                 setStep(0)
                 setProductSlug(null)
                 localStorage.removeItem('colorVariety')
@@ -1158,7 +1170,10 @@ const ProductModal: React.FC<ProductModalType> = ({ visible, setVisible, action 
                 setDummyUploadImage([""])
                 setQuantity(1)
                 setGetSlug("")
-                setProductInDraft(null)
+                setProductInDraft({
+                    isColor: false,
+                    isSize: false,
+                })
                 setStep(0)
                 setProductSlug(null)
                 localStorage.removeItem('colorVariety')

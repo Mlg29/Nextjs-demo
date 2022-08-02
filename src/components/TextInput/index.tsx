@@ -32,7 +32,7 @@ const TextInput: NextPage<InputType> = ({ label, onChange, value, errorMsg, isPa
       {
         type === 'description' ? typeof window !== 'undefined' && <QuilDiv> 
           <Quill
-          style={{ height: '150px', color: 'white', marginBottom: '8%', borderRadius: '10px' }}
+          style={{ height: '130px', color: 'white', marginBottom: '8%', borderRadius: '10px' }}
           placeholder='Enter Description'
           theme="snow"
           value={value || ''}

@@ -55,11 +55,11 @@ function MobileStorePage() {
             }
 
             dispatch(getSellerOrders(payload))
-            dispatch(getStoreById(id))
-            dispatch(getProduct(id))
+            dispatch(getStoreById(id))        
             dispatch(getStaff(id))
-           await dispatch(getPayouts())
-           setStateLoader(false)
+            dispatch(getPayouts())
+            await dispatch(getProduct(id))
+            setStateLoader(false)
         }
 
         loadData()
@@ -103,125 +103,126 @@ function MobileStorePage() {
 
     return (
         <Container>
-        {
-            stateLoader ? <DashboardSkeleton />
-            :
-            <>
             <StoreHeader name={storebyIdData?.brandName} slug={storebyIdData?.slug} />
 
             {
-                productList?.length < 1 && <>
-                    <Break />
-                    <Break />
-                    <Paragraph text='Quick Actions' fontSize={GlobalStyle.size.size14} fontWeight='600' />
+                stateLoader ? <DashboardSkeleton />
+                    :
+                    <>
+                        {
+                            productList?.length < 1 ? <>
+                                <Break />
+                                <Break />
+                                <Paragraph text='Quick Actions' fontSize={GlobalStyle.size.size14} fontWeight='600' />
 
-                    {quickActionArray?.map((data: ArrayOptionType) => {
-                        return <ListCard key={data?.id} {...data} />
-                    })
-                    }
-                </>
+                                {quickActionArray?.map((data: ArrayOptionType) => {
+                                    return <ListCard key={data?.id} {...data} />
+                                })
+                                }
+                            </>
+                            : null
+                        }
+                        {
+                            productList?.length > 0 && <>
+                                <CardOne>
+                                    <Paragraph text='Analytics' fontSize={GlobalStyle.size.size14} fontWeight='bold' margin='0% 0% 10px 0%' />
+                                    <Row>
+                                        <Col sm={12}>
+                                            <CardBox>
+                                                <IconImage src={lock} />
+                                                <Paragraph text='Expected Earning' fontSize={GlobalStyle.size.size14} fontFamily='400' margin='0% 0% 10px 0%' />
+                                                <CurrencyFormat value={storebyIdData?.wallet?.escrow} displayType={'text'} thousandSeparator={true} prefix={'₦'} renderText={value => <Paragraph text={`${value}`} fontSize={GlobalStyle.size.size20} fontWeight='700' />} />
+                                            </CardBox>
+                                        </Col>
+
+                                        <Col sm={12}>
+                                            <CardBox>
+                                                <IconImage src={unlock} />
+                                                <Paragraph text='Store Balance' fontSize={GlobalStyle.size.size14} fontFamily='400' margin='0% 0% 10px 0%' />
+                                                <CurrencyFormat value={storebyIdData?.wallet?.balance} displayType={'text'} thousandSeparator={true} prefix={'₦'} renderText={value => <Paragraph text={`${value}`} fontSize={GlobalStyle.size.size20} fontWeight='700' />} />
+                                            </CardBox>
+                                        </Col>
+                                    </Row>
+                                </CardOne>
+                                <SliderDiv {...settings}>
+                                    <CardTwo>
+                                        <RowStart>
+                                            <IconImage src={Bg} />
+                                            <Paragraph text='Product' fontSize={GlobalStyle.size.size16} margin='0% 0px 0% 15px' />
+                                        </RowStart>
+                                        <Paragraph text={productList?.length} fontSize={GlobalStyle.size.size30} fontWeight='700' margin='0px 0px 0px 0px' />
+                                    </CardTwo>
+                                    <CardTwo>
+                                        <RowStart>
+                                            <IconImage src={bigProfile} />
+                                            <Paragraph text='Staff' fontSize={GlobalStyle.size.size16} margin='0% 0px 0% 15px' />
+                                        </RowStart>
+                                        <Paragraph text={staffList?.length} fontSize={GlobalStyle.size.size30} fontWeight='700' margin='0px 0px 0px 0px' />
+                                    </CardTwo>
+                                    <CardTwo>
+                                        <RowStart>
+                                            <IconImage src={ordd} />
+                                            <Paragraph text='Orders' fontSize={GlobalStyle.size.size16} margin='0% 0px 0% 15px' />
+                                        </RowStart>
+                                        <Paragraph text={sellerOrderList?.length} fontSize={GlobalStyle.size.size30} fontWeight='700' margin='0px 0px 0px 0px' />
+                                    </CardTwo>
+                                </SliderDiv>
+                                <CardOne>
+                                    <Row>
+                                        <Col sm={12}>
+                                            <BigDiv>
+                                                <RowBetween>
+                                                    <Paragraph text={'Total Sales'} fontSize={GlobalStyle.size.size14} fontWeight='700' />
+                                                </RowBetween>
+                                                <Div>
+                                                    <ChartComponent type={'line'} />
+                                                </Div>
+                                            </BigDiv>
+                                        </Col>
+                                    </Row>
+                                </CardOne>
+
+                                <CardOne>
+                                    <BigDiv>
+                                        <RowBetween>
+                                            <Paragraph text={'Store Views'} fontSize={GlobalStyle.size.size14} fontWeight='700' />
+                                        </RowBetween>
+                                        <Div>
+                                            <ChartComponent type={'bar-chart'} />
+                                        </Div>
+                                    </BigDiv>
+                                </CardOne>
+
+                                <CardOne>
+                                    <BigDiv>
+                                        <RowBetween>
+                                            <Paragraph text={'Activities'} fontSize={GlobalStyle.size.size14} fontWeight='700' />
+                                        </RowBetween>
+                                        <br />
+                                        <Div2>
+                                            <Timeline>
+                                                <Timeline.Item color={GlobalStyle.color.bazaraTint}>
+                                                    <Paragraph text={'Your earning has been approved.'} fontSize={GlobalStyle.size.size16} fontWeight='500' />
+                                                    <Paragraph text={'11 JUL 8:10 PM'} fontSize={GlobalStyle.size.size14} fontWeight='700' color={GlobalStyle.color.gray} />
+                                                </Timeline.Item>
+                                                <Timeline.Item color={GlobalStyle.color.bazaraTint}>
+                                                    <Paragraph text={'Product Title approved.'} fontSize={GlobalStyle.size.size16} fontWeight='500' />
+                                                    <Paragraph text={'11 JUL 8:10 PM'} fontSize={GlobalStyle.size.size14} fontWeight='700' color={GlobalStyle.color.gray} />
+                                                </Timeline.Item>
+                                                <Timeline.Item color={GlobalStyle.color.bazaraTint}>
+                                                    <Paragraph text={'Product Title approved.'} fontSize={GlobalStyle.size.size16} fontWeight='500' />
+                                                    <Paragraph text={'11 JUL 8:10 PM'} fontSize={GlobalStyle.size.size14} fontWeight='700' color={GlobalStyle.color.gray} />
+                                                </Timeline.Item>
+                                            </Timeline>
+                                        </Div2>
+                                    </BigDiv>
+                                </CardOne>
+                            </>
+                        }
+
+                        <MobileTabs />
+                    </>
             }
-            {
-                productList?.length > 0 && <>
-                    <CardOne>
-                        <Paragraph text='Analytics' fontSize={GlobalStyle.size.size14} fontWeight='bold' margin='0% 0% 10px 0%' />
-                        <Row>
-                            <Col sm={12}>
-                                <CardBox>
-                                    <IconImage src={lock} />
-                                    <Paragraph text='Expected Earning' fontSize={GlobalStyle.size.size14} fontFamily='400' margin='0% 0% 10px 0%' />
-                                    <CurrencyFormat value={storebyIdData?.wallet?.escrow} displayType={'text'} thousandSeparator={true} prefix={'₦'} renderText={value => <Paragraph text={`${value}`} fontSize={GlobalStyle.size.size20} fontWeight='700' />} />
-                                </CardBox>
-                            </Col>
-
-                            <Col sm={12}>
-                                <CardBox>
-                                    <IconImage src={unlock} />
-                                    <Paragraph text='Store Balance' fontSize={GlobalStyle.size.size14} fontFamily='400' margin='0% 0% 10px 0%' />
-                                    <CurrencyFormat value={storebyIdData?.wallet?.balance} displayType={'text'} thousandSeparator={true} prefix={'₦'} renderText={value => <Paragraph text={`${value}`} fontSize={GlobalStyle.size.size20} fontWeight='700' />} />
-                                </CardBox>
-                            </Col>
-                        </Row>
-                    </CardOne>
-                    <SliderDiv {...settings}>
-                        <CardTwo>
-                            <RowStart>
-                                <IconImage src={Bg} />
-                                <Paragraph text='Product' fontSize={GlobalStyle.size.size16} margin='0% 0px 0% 15px' />
-                            </RowStart>
-                            <Paragraph text={productList?.length} fontSize={GlobalStyle.size.size30} fontWeight='700' margin='0px 0px 0px 0px' />
-                        </CardTwo>
-                        <CardTwo>
-                            <RowStart>
-                                <IconImage src={bigProfile} />
-                                <Paragraph text='Staff' fontSize={GlobalStyle.size.size16} margin='0% 0px 0% 15px' />
-                            </RowStart>
-                            <Paragraph text={staffList?.length} fontSize={GlobalStyle.size.size30} fontWeight='700' margin='0px 0px 0px 0px' />
-                        </CardTwo>
-                        <CardTwo>
-                            <RowStart>
-                                <IconImage src={ordd} />
-                                <Paragraph text='Orders' fontSize={GlobalStyle.size.size16} margin='0% 0px 0% 15px' />
-                            </RowStart>
-                            <Paragraph text={sellerOrderList?.length} fontSize={GlobalStyle.size.size30} fontWeight='700' margin='0px 0px 0px 0px' />
-                        </CardTwo>
-                    </SliderDiv>
-                    <CardOne>
-                        <Row>
-                            <Col sm={12}>
-                                <BigDiv>
-                                    <RowBetween>
-                                        <Paragraph text={'Total Sales'} fontSize={GlobalStyle.size.size14} fontWeight='700' />
-                                    </RowBetween>
-                                    <Div>
-                                        <ChartComponent type={'line'} />
-                                    </Div>
-                                </BigDiv>
-                            </Col>
-                        </Row>
-                    </CardOne>
-
-                    <CardOne>
-                        <BigDiv>
-                            <RowBetween>
-                                <Paragraph text={'Store Views'} fontSize={GlobalStyle.size.size14} fontWeight='700' />
-                            </RowBetween>
-                            <Div>
-                                <ChartComponent type={'bar-chart'} />
-                            </Div>
-                        </BigDiv>
-                    </CardOne>
-
-                    <CardOne>
-                        <BigDiv>
-                            <RowBetween>
-                                <Paragraph text={'Activities'} fontSize={GlobalStyle.size.size14} fontWeight='700' />
-                            </RowBetween>
-                            <br />
-                            <Div2>
-                                <Timeline>
-                                    <Timeline.Item color={GlobalStyle.color.bazaraTint}>
-                                        <Paragraph text={'Your earning has been approved.'} fontSize={GlobalStyle.size.size16} fontWeight='500' />
-                                        <Paragraph text={'11 JUL 8:10 PM'} fontSize={GlobalStyle.size.size14} fontWeight='700' color={GlobalStyle.color.gray} />
-                                    </Timeline.Item>
-                                    <Timeline.Item color={GlobalStyle.color.bazaraTint}>
-                                        <Paragraph text={'Product Title approved.'} fontSize={GlobalStyle.size.size16} fontWeight='500' />
-                                        <Paragraph text={'11 JUL 8:10 PM'} fontSize={GlobalStyle.size.size14} fontWeight='700' color={GlobalStyle.color.gray} />
-                                    </Timeline.Item>
-                                    <Timeline.Item color={GlobalStyle.color.bazaraTint}>
-                                        <Paragraph text={'Product Title approved.'} fontSize={GlobalStyle.size.size16} fontWeight='500' />
-                                        <Paragraph text={'11 JUL 8:10 PM'} fontSize={GlobalStyle.size.size14} fontWeight='700' color={GlobalStyle.color.gray} />
-                                    </Timeline.Item>
-                                </Timeline>
-                            </Div2>
-                        </BigDiv>
-                    </CardOne>
-                </>
-            }
-
-            <MobileTabs />
-        </>
-        }
         </Container>
     )
 }
