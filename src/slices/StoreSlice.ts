@@ -54,8 +54,12 @@ export const getPersonalStore = createAsyncThunk(
     'store/myStore',
     async () => {
         const response = await getRequest("/sidehustle/account")
+
         if (response?.status === 200) {
             return response?.data?.data
+        }
+        else {
+            return []
         }
     }
 )

@@ -58,7 +58,7 @@ const MobileSignup = () => {
             const resultAction = await dispatch(createUser(payload))
             if (createUser.fulfilled.match(resultAction)) {
                 setLoader(false)
-                return router.push('/create-store')
+                return router.push('/')
             } else {
                 if (resultAction.payload) {
                     setLoader(false)
@@ -90,7 +90,7 @@ const MobileSignup = () => {
             var resultAction = await dispatch(oauthLogin(payload))
             if (oauthLogin.fulfilled.match(resultAction)) {
                 setLoader(false)
-                return router.push('/create-store')
+                return router.push('/')
             } else {
                 if (resultAction.payload) {
                     setLoader(false)

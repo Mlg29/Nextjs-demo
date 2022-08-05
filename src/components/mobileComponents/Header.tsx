@@ -25,7 +25,7 @@ const MobileHeader: React.FC<Headers> = ({ icon, header }) => {
                 />
             </Div>
             {/* <Header>{header}</Header> */}
-            <Paragraph  text={header} fontSize={GlobalStyle.size.size14} fontWeight='400' textTransform='capitalize'  />
+            <Paragraph  text={header} fontSize={GlobalStyle.size.size16} fontWeight='400' textTransform='capitalize'  />
             <Header></Header>
         </RowJustifyAlignBetween>
 

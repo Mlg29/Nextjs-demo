@@ -69,7 +69,7 @@ a {
   text-decoration: none !important;
 }
 .slick-slider .slick-list, .slick-slider .slick-track {
-  margin-left: -42px;
+  /* margin-left: -42px; */
   display: flex !important;
 }
 .anticon svg {
@@ -178,7 +178,7 @@ thead > tr > th {
   border-color: #F80595 !important;
 }
 
-.slick-initialized .slick-slide div {
+.slick-initialized .slick-slide .mobile {
   margin: 4% 5% 4% 0% !important;
 }
 
@@ -234,7 +234,7 @@ thead > tr > th {
 }
 
 .slick-initialized .slick-slide {
-  width: 50% !important;
+  /* width: 50% !important; */
   margin: 0% 10px !important
 }
 

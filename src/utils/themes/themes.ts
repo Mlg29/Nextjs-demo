@@ -28,7 +28,8 @@ export const GlobalStyle = {
         antdCyan: 'cyan',
         antdBlue: 'blue',
         antdGeekBlue: 'geekblue',
-        antdPurple: 'purple'
+        antdPurple: 'purple',
+        accent: "#B5AFFF"
     },
     size: {
         size8: "0.5em",

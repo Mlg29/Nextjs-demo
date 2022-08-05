@@ -20,6 +20,7 @@ export const getStaff = createAsyncThunk(
     'staff/getStaff',
     async (payload: string) => {
         const response = await getRequest(`/sidehustle/getStoreUsers?storeId=${payload}`)
+        console.log({response})
         if (response?.status === 200) {
             return response?.data?.data
         }

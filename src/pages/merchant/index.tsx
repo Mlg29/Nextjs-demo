@@ -1,6 +1,7 @@
 import React from 'react'
 import { windowWidth } from '../../utils/windowWidth'
 import DesktopMerchant from '../../components/DesktopComponent/DesktopMerchant'
+import MobileMerchantSignup from '../../components/mobileComponents/MobileMerchantSignup'
 
 const Merchant = () => {
   const window = windowWidth()
@@ -18,9 +19,9 @@ const Merchant = () => {
         window?.innerWidth >= 640 && <DesktopMerchant />
       }
 
-      {/* {
-        window?.innerWidth < 640 && <MobileStorePage />
-      } */}
+      {
+        window?.innerWidth < 640 && <MobileMerchantSignup />
+      }
 
     </div>
   )

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useFormik } from 'formik';
 import {
     SmallText,
@@ -15,61 +15,56 @@ import styled from 'styled-components';
 import { apple, cancel, google } from '../../assets'
 import GoogleLogin from 'react-google-login'
 import AppleSignin from 'react-apple-signin-auth';
-import { LoginFormData } from '../../utils/types';
-import { LoginSchema } from '../../utils/schemas';
+import { SignupFormData } from '../../utils/types';
+import { SignupSchema } from '../../utils/schemas';
 import TextInput from '../TextInput';
 import Button from '../Button';
-import { useRouter } from 'next/router'
-import MobileHeader from './Header';
-import { oauthLogin, signInUser } from '../../slices/AuthSlice'
-import { useAppDispatch, useAppSelector } from '../../app/hook'
-import ResponseModal from '../Modal/ResponseModal';
-import { getPersonalStore, myStore } from '../../slices/StoreSlice';
-import Paragraph from '../Paragraph';
 import { GlobalStyle } from '../../utils/themes/themes';
+import Link from 'next/link'
+import MobileHeader from './Header';
+import { useAppDispatch } from '../../app/hook'
+import { createUser, oauthLogin } from '../../slices/AuthSlice';
+import { useRouter } from 'next/router';
+import ResponseModal from '../Modal/ResponseModal';
 
-
-
-const MobileLogin = () => {
+const MobileMerchantSignup = () => {
     const dispatch = useAppDispatch()
     const [loader, setLoader] = useState(false)
+    const router = useRouter()
     const [errorType, setErrorType] = useState("")
     const [errorTitle, setErrorTitle] = useState("")
     const [errorVisible, setErrorVisible] = useState(false)
-    const myStoreList = useAppSelector(myStore)
 
 
-    const router = useRouter()
-
-    const initialValues: LoginFormData = {
+    const initialValues: SignupFormData = {
+        firstName: '',
+        lastName: '',
+        phoneNumber: '',
         email: '',
         password: '',
     };
 
-
     const handleFormSubmit = async (data) => {
+        const payload = {
+            fName: data.firstName,
+            lName: data.lastName,
+            password: data.password,
+            mobile: data.phoneNumber,
+            email: data.email,
+        };
+
         try {
             setLoader(true)
-            const resultAction = await dispatch(signInUser(data))
-            if (signInUser.fulfilled.match(resultAction)) {
+            const resultAction = await dispatch(createUser(payload))
+            if (createUser.fulfilled.match(resultAction)) {
                 setLoader(false)
-                var response = await dispatch(getPersonalStore())
-                if (getPersonalStore.fulfilled.match(response)) {
-                    if (response.payload?.length > 0) {
-                        localStorage.setItem('activeId', response.payload[0]?.id)
-                        localStorage.setItem('activeName', response.payload[0]?.brandName)
-                        return router.push('/my-store')
-                    }
-                    else {
-                        return router.push('/')
-                    }
-                }
+                return router.push('/create-store')
             } else {
                 if (resultAction.payload) {
                     setLoader(false)
                     setErrorVisible(true)
                     setErrorType('Error')
-                    setErrorTitle("Error while logging in")
+                    setErrorTitle("Error while Creating your account")
                     console.log('error1', `Update failed: ${resultAction.error.message}`)
                 } else {
                     setLoader(false)
@@ -95,17 +90,7 @@ const MobileLogin = () => {
             var resultAction = await dispatch(oauthLogin(payload))
             if (oauthLogin.fulfilled.match(resultAction)) {
                 setLoader(false)
-                var responseD = await dispatch(getPersonalStore())
-                if (getPersonalStore.fulfilled.match(response)) {
-                    if (responseD.payload?.length > 0) {
-                        localStorage.setItem('activeId', responseD.payload[0]?.id)
-                        localStorage.setItem('activeName', responseD.payload[0]?.brandName)
-                        return router.push('/my-store')
-                    }
-                    else {
-                        return router.push('/')
-                    }
-                }
+                return router.push('/create-store')
             } else {
                 if (resultAction.payload) {
                     setLoader(false)
@@ -129,22 +114,37 @@ const MobileLogin = () => {
         setErrorVisible(false)
     }
 
+
     const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
         useFormik({
             initialValues,
-            validationSchema: LoginSchema,
-            onSubmit: (data: LoginFormData) => handleFormSubmit(data),
+            validationSchema: SignupSchema,
+            onSubmit: (data: SignupFormData) => handleFormSubmit(data),
         });
 
     return (
         <Container>
             <ColumnContainer>
                 <MobileHeader
-                    header="Sign in"
+                    header="Create account"
                     icon={cancel}
-
                 />
                 <br />
+
+                <TextInput
+                    label='First Name'
+                    required
+                    value={values.firstName}
+                    onChange={handleChange('firstName')}
+                    errorMsg={touched.firstName ? errors.firstName : undefined}
+                />
+                <TextInput
+                    label='Last Name'
+                    required
+                    value={values.lastName}
+                    onChange={handleChange('lastName')}
+                    errorMsg={touched.lastName ? errors.lastName : undefined}
+                />
                 <TextInput
                     label='Email'
                     required
@@ -153,17 +153,21 @@ const MobileLogin = () => {
                     errorMsg={touched.email ? errors.email : undefined}
                 />
                 <TextInput
-                    label='Password'
-                    value={values.password}
+                    label='Phone Number'
                     required
+                    value={values.phoneNumber}
+                    onChange={handleChange('phoneNumber')}
+                    errorMsg={touched.phoneNumber ? errors.phoneNumber : undefined}
+                />
+                <TextInput
+                    label='Password'
+                    required
+                    value={values.password}
                     isPassword
                     onChange={handleChange('password')}
                     errorMsg={touched.password ? errors.password : undefined}
                 />
-                <ViewDiv>
-                    <SmallText onClick={() => router.push('/reset-password')}>Forgot password?</SmallText>
-                </ViewDiv>
-                <Button isLoading={loader} children={"Sign in"} handlePress={handleSubmit} />
+                <Button isLoading={loader} children={"Create Account"} handlePress={handleSubmit} />
                 <DividerContainer>OR</DividerContainer>
                 <GoogleLogin
                     clientId="962853764584-0e6b1hshuvm5obq8lipkd4tkoebt3scb.apps.googleusercontent.com"
@@ -187,11 +191,10 @@ const MobileLogin = () => {
                     buttonText="Login"
                     onSuccess={handleSuccess}
                     onFailure={handleFailure}
-                // cookiePolicy={'single_host_origin'}
                 />
                 <AppleSignin
                     authOptions={{
-                        clientId: '962853764584-0aimp14rac2qi4er2e0mmdgp97cu246o.apps.googleusercontent.com',
+                        clientId: 'com.example.web',
                         scope: 'email name',
                         redirectURI: 'https://example.com',
                         state: 'state',
@@ -206,6 +209,7 @@ const MobileLogin = () => {
                     onError={(error) => console.error(error)}
                     skipScript={false}
                     iconProp={{ style: { marginTop: '10px' } }}
+                    // render={(props) => <button {...props}>My Custom Button</button>}
                     render={(renderProps) => {
                         return (
                             <AuthCard
@@ -224,17 +228,10 @@ const MobileLogin = () => {
                         );
                     }}
                 />
+                <View>
+                    <SmallText>Already have an account? <Link href={'/login'}><Span>Sign in</Span></Link></SmallText>
+                </View>
             </ColumnContainer>
-
-            <BottomContainer>
-                <View>
-                    <SmallTextP onClick={() => router.push('/signup')}>Create an account</SmallTextP>
-                </View>
-                <View>
-                    <SmallTextP onClick={() => router.push('/merchant')}>Sell on Bazara</SmallTextP>
-                </View>
-
-            </BottomContainer>
 
             <ResponseModal
                 title={errorTitle}
@@ -247,25 +244,15 @@ const MobileLogin = () => {
     )
 }
 
-export default MobileLogin
+export default MobileMerchantSignup
 
 
 const View = styled.div`
  display: flex;
  justify-content: center;
+ margin-top: 3%;
 `
 
-const ViewDiv = styled.div`
- display: flex;
- justify-content: flex-end;
- margin-top: -20px;
-`
-
-export const SmallTextP = styled.p`
-    font-size: ${GlobalStyle.size.size16};
-    font-weight: 400;
-    font-family: Nunito;
-    line-height: 22px;
-    margin:3% 0%;
-    color: ${GlobalStyle.color.white}
+const Span = styled.span`
+ color: ${GlobalStyle.color.bazaraTint}
 `

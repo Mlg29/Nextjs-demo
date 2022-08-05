@@ -77,9 +77,14 @@ const MobileProductColor = () => {
             const editableProduct = productSlug?.variants?.find(data => data?._id === editableItem)
 
             setMultipleUpload(editableProduct ? editableProduct?.variantImg : [])
+           
             setSizeList(editableProduct ? editableProduct?.spec : [])
             setQuantity(editableProduct ? editableProduct?.spec[0]?.quantity : 0)
             setPrice(editableProduct ? editableProduct?.spec[0]?.price : 0)
+
+            if(editableItem) {
+                setDummyUploadImage([...dummyUploadImage, ""])
+            }
 
         }
 

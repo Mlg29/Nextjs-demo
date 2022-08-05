@@ -41,12 +41,13 @@ const MobileAddProduct = () => {
     const [type, setType] = useState('')
 
     const initialValues: ProductFormData = {
-        productName: productSlug?.name,
-        productDescription: productSlug?.description,
-        category: productSlug?.categories
+        productName: productSlug ? productSlug?.name: "",
+        productDescription: productSlug ? productSlug?.description : "",
+        category: productSlug ? productSlug?.categories : ""
     };
 
-    console.log({productSlug, getSlug})
+
+
 
     useEffect(() => {
         setProductVar(productSlug?.variants)

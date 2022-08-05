@@ -107,6 +107,16 @@ export type ProductCreateFormData = {
     status: string
 }
 
+export type HomeHeaderType = {
+    data: any
+}
+
+export type CategoryState = {
+    category: Array<any>,
+    storeBySlug: any,
+    error: any,
+    loading: boolean
+}
 export type ProductUpdateFormData = {
     id: string,
     name?: string,

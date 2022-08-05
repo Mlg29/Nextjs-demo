@@ -61,6 +61,7 @@ function MobileSettings() {
 
   useEffect(() => {
     dispatch(getStoreById(activeId))
+    setChecked(storeInfo?.status)
     dispatch(getPersonalStore())
     dispatch(getAssignedStoresRole())
   }, [activeId])
@@ -155,6 +156,7 @@ function MobileSettings() {
     localStorage.removeItem('token')
     localStorage.removeItem('activeId')
     localStorage.removeItem('activeName')
+    localStorage.removeItem('role')
     return router.push('/')
   }
 
@@ -168,6 +170,7 @@ function MobileSettings() {
     dispatch(getAssignedStoresRole())
 
   }
+
 
   return (
     <Container>
@@ -193,7 +196,7 @@ function MobileSettings() {
         })
       }
       <View>
-        <Paragraph text='Store' fontSize={GlobalStyle.size.size14} fontWeight='600' />
+        <Paragraph text='Stores' fontSize={GlobalStyle.size.size14} fontWeight='600' />
       </View>
       <Subdiv>
         {

@@ -8,6 +8,7 @@ import { createWrapper, HYDRATE } from "next-redux-wrapper";
 import ProfileReducer from "../slices/ProfileSlice"
 import NotificationReducer from "../slices/NotificationSlice";
 import StaffReducer from "../slices/StaffSlice"
+import CategoryReducer from "../slices/CategorySlice"
 
 const combinedReducer = combineReducers({
     auth: AuthReducer,
@@ -18,6 +19,7 @@ const combinedReducer = combineReducers({
     profiles: ProfileReducer,
     notifications: NotificationReducer,
     staff: StaffReducer,
+    category: CategoryReducer
 })
 
 const reducer = (state: ReturnType<typeof combinedReducer>, action: AnyAction) => {

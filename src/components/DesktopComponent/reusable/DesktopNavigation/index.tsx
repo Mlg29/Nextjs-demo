@@ -35,6 +35,7 @@ const DesktopNavigation = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('activeId')
     localStorage.removeItem('activeName')
+    localStorage.removeItem('role')
     return router.push('/')
   }
 

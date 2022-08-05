@@ -72,7 +72,8 @@ export const hori: StaticImageData = require('../assets/hori.svg');
 export const verti: StaticImageData = require('../assets/More.svg');
 export const del: StaticImageData = require('../assets/delS.svg');
 export const fancyPlus: StaticImageData = require('../assets/fancyplus.svg');
-
+export const buy: StaticImageData = require('../assets/Buy.svg');
+export const BuyerNotification: StaticImageData = require('../assets/Notification.svg');
 export const greaterThan: StaticImageData = require('../assets/greater.svg');
 export const horiThan: StaticImageData = require('../assets/down.svg');
 export const noProd: StaticImageData = require('../assets/no-prod.svg');
@@ -82,6 +83,17 @@ export const Bg: StaticImageData = require('../assets/bg.svg');
 export const ordd: StaticImageData = require('../assets/ordd.svg');
 export const imag2: StaticImageData = require('../assets/imag2.svg');
 
+export const BuyerHomeActive: StaticImageData = require('../assets/Buyer-home.svg');
+export const BuyerHomeInActive: StaticImageData = require('../assets/Buyer-in.svg');
+
+export const BuyerExploreActive: StaticImageData = require('../assets/buy-sa.svg');
+export const BuyerExploreInActive: StaticImageData = require('../assets/buy-s.svg');
+export const BuyerProfileActive: StaticImageData = require('../assets/buy-pa.svg');
+export const BuyerProfileInActive: StaticImageData = require('../assets/buy-p.svg');
+export const BuyerOrderActive: StaticImageData = require('../assets/buy-a.svg');
+export const BuyerOrderInActive: StaticImageData = require('../assets/buy-oi.svg');
+export const BuyerChatActive: StaticImageData = require('../assets/buy-ca.svg');
+export const BuyerChatInActive: StaticImageData = require('../assets/buy-ci.svg');
 
 
 

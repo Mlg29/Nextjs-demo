@@ -3,25 +3,26 @@ import React, { useEffect, useState } from 'react'
 
 import styles from "../../styles/Home.module.css"
 
-import { useRouter } from 'next/router'
-import Login from './login'
-import Button from '../components/Button'
-import { RowCenter } from '../utils/StyledComponent'
-
 import styled from 'styled-components'
-import Paragraph from '../components/Paragraph'
+import { windowWidth } from '../utils/windowWidth'
+import MobileHome from '../components/mobileComponents/MobileHome'
 
 
 function index() {
+  const window = windowWidth()
 
- const router = useRouter()
 
 
   return (
     <Div>
-        <RowCenter>
-            <Button children="Go To Login" handlePress={() => router.push('/login')} />
-        </RowCenter>
+        {/* {
+        window?.innerWidth >= 641 && <DesktopSignup />
+      } */}
+
+      {
+        window?.innerWidth < 640 && <MobileHome />
+      }
+
     </Div>
   )
 }
@@ -30,10 +31,5 @@ export default index
 
 
 const Div = styled.div`
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  overflow-y: scroll;
+
 `

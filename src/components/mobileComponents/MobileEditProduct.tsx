@@ -79,6 +79,8 @@ function MobileEditProduct() {
                 setResponseModal(true)
                 setTitle('You have successfully updated your product')
                 setType('Success')
+                localStorage.removeItem('slug')
+                localStorage.removeItem('editableId')
 
             }
             else {

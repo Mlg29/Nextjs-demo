@@ -1,8 +1,6 @@
 import React from 'react'
 import { windowWidth } from '../../utils/windowWidth'
 
-import MobileSignup from '../../components/mobileComponents/MobileSignup'
-import DesktopSignup from '../../components/DesktopComponent/DesktopSignup'
 import MobileStaff from '../../components/mobileComponents/MobileStaff'
 import DesktopLayouts from '../../components/DesktopComponent/reusable/DesktopLayouts'
 import DesktopStaff from '../../components/DesktopComponent/DesktopStaff'

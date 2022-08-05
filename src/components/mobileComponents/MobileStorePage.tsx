@@ -55,7 +55,7 @@ function MobileStorePage() {
             }
 
             dispatch(getSellerOrders(payload))
-            dispatch(getStoreById(id))        
+            dispatch(getStoreById(id))
             dispatch(getStaff(id))
             dispatch(getPayouts())
             await dispatch(getProduct(id))
@@ -101,6 +101,7 @@ function MobileStorePage() {
 
     ]
 
+    console.log({staffList})
     return (
         <Container>
             <StoreHeader name={storebyIdData?.brandName} slug={storebyIdData?.slug} />
@@ -120,7 +121,7 @@ function MobileStorePage() {
                                 })
                                 }
                             </>
-                            : null
+                                : null
                         }
                         {
                             productList?.length > 0 && <>
@@ -144,29 +145,32 @@ function MobileStorePage() {
                                         </Col>
                                     </Row>
                                 </CardOne>
-                                <SliderDiv {...settings}>
-                                    <CardTwo>
-                                        <RowStart>
-                                            <IconImage src={Bg} />
-                                            <Paragraph text='Product' fontSize={GlobalStyle.size.size16} margin='0% 0px 0% 15px' />
-                                        </RowStart>
-                                        <Paragraph text={productList?.length} fontSize={GlobalStyle.size.size30} fontWeight='700' margin='0px 0px 0px 0px' />
-                                    </CardTwo>
-                                    <CardTwo>
-                                        <RowStart>
-                                            <IconImage src={bigProfile} />
-                                            <Paragraph text='Staff' fontSize={GlobalStyle.size.size16} margin='0% 0px 0% 15px' />
-                                        </RowStart>
-                                        <Paragraph text={staffList?.length} fontSize={GlobalStyle.size.size30} fontWeight='700' margin='0px 0px 0px 0px' />
-                                    </CardTwo>
-                                    <CardTwo>
-                                        <RowStart>
-                                            <IconImage src={ordd} />
-                                            <Paragraph text='Orders' fontSize={GlobalStyle.size.size16} margin='0% 0px 0% 15px' />
-                                        </RowStart>
-                                        <Paragraph text={sellerOrderList?.length} fontSize={GlobalStyle.size.size30} fontWeight='700' margin='0px 0px 0px 0px' />
-                                    </CardTwo>
-                                </SliderDiv>
+                                <DivSlider>
+                                    <SliderDiv {...settings}>
+                                        <CardTwo>
+                                            <RowStart>
+                                                <IconImage src={Bg} />
+                                                <Paragraph text='Product' fontSize={GlobalStyle.size.size16} margin='0% 0px 0% 15px' />
+                                            </RowStart>
+                                            <Paragraph text={productList ? productList?.length : "0"} fontSize={GlobalStyle.size.size30} fontWeight='700' margin='0px 0px 0px 0px' />
+                                        </CardTwo>
+                                        <CardTwo>
+                                            <RowStart>
+                                                <IconImage src={bigProfile} />
+                                                <Paragraph text='Staff' fontSize={GlobalStyle.size.size16} margin='0% 0px 0% 15px' />
+                                            </RowStart>
+                                            <Paragraph text={staffList ? staffList?.length : "0"} fontSize={GlobalStyle.size.size30} fontWeight='700' margin='0px 0px 0px 0px' />
+                                        </CardTwo>
+                                        <CardTwo>
+                                            <RowStart>
+                                                <IconImage src={ordd} />
+                                                <Paragraph text='Orders' fontSize={GlobalStyle.size.size16} margin='0% 0px 0% 15px' />
+                                            </RowStart>
+                                            <Paragraph text={sellerOrderList ? sellerOrderList?.length : "0"} fontSize={GlobalStyle.size.size30} fontWeight='700' margin='0px 0px 0px 0px' />
+                                        </CardTwo>
+
+                                    </SliderDiv>
+                                </DivSlider>
                                 <CardOne>
                                     <Row>
                                         <Col sm={12}>
@@ -290,4 +294,8 @@ const Div2 = styled.div`
  background: ${GlobalStyle.color.darkBlack};
  width: 100%;
  padding: 5px 0px;
+`
+
+const DivSlider = styled.div`
+margin: 4% 5% 4% -10em;
 `
