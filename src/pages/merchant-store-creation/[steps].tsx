@@ -106,7 +106,7 @@ const MerchantSteps = () => {
         const payload = {
             brandName: data.storeName,
             description: data.description,
-            imgUrl: "",
+            coverImg: "",
             address: data.street + " " + data.city + " " + data.state,
             phoneNumber: data.phoneNumber,
             location: {

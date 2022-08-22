@@ -9,6 +9,7 @@ import { getRequest, postRequest, specialPostRequest } from "../utils/helper/hel
 
 const initialState: OrdersState = {
     sellerOrders: [],
+    buyerOrders: [],
     sellerOrderDetails: null,
     outOfStock: null,
     loading: null,
@@ -27,6 +28,17 @@ export const getSellerOrders = createAsyncThunk(
         }
     }
 )
+
+export const getBuyerOrders = createAsyncThunk(
+    'orders/getBuyerOrders',
+    async () => {
+        const response = await getRequest(`/sidehustle/orders`)
+        if (response?.status === 200) {
+            return response?.data?.data
+        }
+    }
+)
+
 
 export const searchOrder = createAsyncThunk(
     'order/searchOrder',
@@ -59,6 +71,7 @@ export const getSellerOrderDetail = createAsyncThunk(
         }
     }
 )
+
 
 
 export const changeOrderStatus = createAsyncThunk(
@@ -111,6 +124,18 @@ export const SellerOrderSlice = createSlice({
                     state.sellerOrders = action.payload
             })
         builder.addCase(getSellerOrders.rejected, (state, action) => {
+            state.loading = false,
+            state.sellerOrders = []
+                state.error = action.error.message
+        }),
+        builder.addCase(getBuyerOrders.pending, (state, action) => {
+            state.loading = true
+        }),
+            builder.addCase(getBuyerOrders.fulfilled, (state, action: PayloadAction<any>) => {
+                state.loading = false,
+                    state.buyerOrders = action.payload
+            })
+        builder.addCase(getBuyerOrders.rejected, (state, action) => {
             state.loading = false,
             state.sellerOrders = []
                 state.error = action.error.message
@@ -187,6 +212,7 @@ export const SellerOrderSlice = createSlice({
 })
 
 export const sellerOrders = (state: RootState) => state.orders.sellerOrders;
+export const buyerOrders = (state: RootState) => state.orders.buyerOrders;
 
 export const sellerOrderDetails = (state: RootState) => state.orders.sellerOrderDetails
 

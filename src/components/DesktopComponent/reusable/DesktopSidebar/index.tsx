@@ -108,7 +108,7 @@ const DesktopSidebar = () => {
 
   return (
     <Div>
-      <MainDiv>
+      <MainDiv onClick={() => router.push('/my-store')}>
         <IconImage src={logo} />
       </MainDiv>
       <br />

@@ -5,7 +5,7 @@ import { useRouter } from "next/router"
 import { changeOrderStatus, getSellerOrderDetail, sellerOrderDetails, orderLoader } from '../../slices/OrderSlice'
 import { BottomContainer, ColumnContainer, Container, IconImage } from './Styled'
 import { RowStart, RowAlignStart, RowBetween } from '../../utils/StyledComponent'
-import { calender, chevronLeft, pin } from '../../assets'
+import { calender, chevronLeft, landMark, pin } from '../../assets'
 import Paragraph from '../Paragraph'
 import styled from 'styled-components'
 import { Tag, Divider } from "antd"
@@ -95,6 +95,11 @@ function MobileEditProduct() {
         }
     }
 
+    const addAnotherColor = () => {
+        localStorage.removeItem('editableId')
+        router.push('/product-variant')
+    }
+
     const { values, errors, touched, handleChange, handleSubmit, handleBlur } =
         useFormik({
             initialValues,
@@ -174,10 +179,16 @@ function MobileEditProduct() {
                     <Subdiv>
                         {
                             productVariantList?.map((data, i) => {
-                                return <ProductVariantCard edit key={i} handleDeleteClick={() => removeVariant(data, i)} handleEditClick={() => editVariant(data, i)} name={productBySlugData?.name} price={data?.spec[0]?.price} image={data.variantImg?.length > 0 ? data.variantImg[0] : data.variantImg} />
+                                return <ProductVariantCard edit key={i} handleDeleteClick={() => removeVariant(data, i)} handleEditClick={() => editVariant(data, i)} name={productBySlugData?.name} price={data?.spec[0]?.price} image={Array.isArray(data?.variantImg) ? data.variantImg[0] : data.variantImg} />
                             })
                         }
                     </Subdiv>
+                    <View onClick={() => addAnotherColor()}>
+                            <IconImage
+                                src={landMark}
+                            />
+                            <Paragraph text='Add Another Colour' fontSize={GlobalStyle.size.size14} fontFamily='400' margin='0% 0% 0% 3%' />
+                        </View>
                 </ColumnContainer>
                 <BottomContainer>
                     <Button isLoading={loader} children='Update Product' handlePress={handleSubmit} />
@@ -214,7 +225,7 @@ const Subdiv = styled.div`
    margin-top: 3%;
 `
 
-function setResponseModal(arg0: boolean) {
-    throw new Error('Function not implemented.')
-}
-
+const View = styled.div`
+    display: flex;
+    margin-top: 20px;
+`

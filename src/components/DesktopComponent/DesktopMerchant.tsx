@@ -40,7 +40,7 @@ const DesktopMerchant = () => {
     const initialValues: MerchantFormData = {
         firstName: '',
         lastName: '',
-        mobile: '',
+        // mobile: '',
         email: '',
         password: '',
     };
@@ -156,13 +156,13 @@ const DesktopMerchant = () => {
                                 onChange={handleChange('email')}
                                 errorMsg={touched.email ? errors.email : undefined}
                             />
-                            <TextInput
+                            {/* <TextInput
                                 label='Phone Number'
                                 required
                                 value={values.mobile}
                                 onChange={handleChange('mobile')}
                                 errorMsg={touched.mobile ? errors.mobile : undefined}
-                            />
+                            /> */}
                             <TextInput
                                 label='Password'
                                 required

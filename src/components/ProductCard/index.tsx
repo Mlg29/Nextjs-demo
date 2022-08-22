@@ -69,12 +69,11 @@ const ProductCard = ({ data, setVisible, setTitle, setType }) => {
     );
 
 
-
     return (
         <RowBetween>
             <ColumnDiv>
                 <RowStart>
-                    <ImageContainer source={data?.variants[0]?.variantImg[0]} width={40} height={40} />
+                    <ImageContainer source={Array.isArray(data?.variants[0]?.variantImg) ? data?.variants[0]?.variantImg[0] : data?.variants[0]?.variantImg} width={40} height={40} />
                     <SubDiv>
                         <Paragraph text={data?.name} fontSize={GlobalStyle.size.size14} fontWeight='600' />
                         <RowStart>

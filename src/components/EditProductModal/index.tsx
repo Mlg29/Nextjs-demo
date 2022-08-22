@@ -264,7 +264,7 @@ const EditProductModal: React.FC<EditProductModalType> = ({ visible, setVisible,
                                         <RowBetween>
                                             <RowStart>
                                                 <ImageContainer
-                                                    source={data?.variantImg[0]}
+                                                    source={Array.isArray(data?.variantImg) ? data?.variantImg[0]: data?.variantImg}
                                                     width={40}
                                                     height={40}
                                                 />
@@ -284,7 +284,7 @@ const EditProductModal: React.FC<EditProductModalType> = ({ visible, setVisible,
                                     <Div>
                                         <Grid>
                                             {
-                                                data?.variantImg?.map((data, i) => {
+                                               Array.isArray(data?.variantImg) && data?.variantImg?.map((data, i) => {
                                                     return <DesktopUploadedImage key={i} index={i} imageUrl={data} />
                                                 })
                                             }

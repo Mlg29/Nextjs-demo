@@ -6,8 +6,9 @@ const Paragraph = memo(
     ({
         text,
         fontSize = '0.9375em',
-        lineHeight,
+        lineHeight = "22px",
         textTransform ='inherit',
+        textDecoration = 'none',
         textAlign='left',
         color = 'white',
         fontFamily = 'Nunito',
@@ -25,9 +26,9 @@ const Paragraph = memo(
                 fontWeight,
                 fontFamily,
                 margin,
-                textTransform
+                textTransform, textDecoration
             }),
-            [color, fontWeight, textAlign, lineHeight, fontSize, margin, textTransform],
+            [color, fontWeight, textAlign, lineHeight, fontSize, margin, textTransform, textDecoration],
         );
 
         return (

@@ -39,7 +39,7 @@ const MobileSignup = () => {
     const initialValues: SignupFormData = {
         firstName: '',
         lastName: '',
-        phoneNumber: '',
+        // phoneNumber: '',
         email: '',
         password: '',
     };
@@ -49,7 +49,7 @@ const MobileSignup = () => {
             fName: data.firstName,
             lName: data.lastName,
             password: data.password,
-            mobile: data.phoneNumber,
+            // mobile: data.phoneNumber,
             email: data.email,
         };
 
@@ -152,13 +152,13 @@ const MobileSignup = () => {
                     onChange={handleChange('email')}
                     errorMsg={touched.email ? errors.email : undefined}
                 />
-                <TextInput
+                {/* <TextInput
                     label='Phone Number'
                     required
                     value={values.phoneNumber}
                     onChange={handleChange('phoneNumber')}
                     errorMsg={touched.phoneNumber ? errors.phoneNumber : undefined}
-                />
+                /> */}
                 <TextInput
                     label='Password'
                     required

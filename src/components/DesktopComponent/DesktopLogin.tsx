@@ -23,6 +23,7 @@ import Paragraph from '../Paragraph';
 import { GlobalStyle } from '../../utils/themes/themes';
 import { BottomContainer } from '../mobileComponents/Styled';
 import { getPersonalStore, myStore } from '../../slices/StoreSlice';
+import { RowBetween } from '../../utils/StyledComponent';
 
 
 
@@ -52,8 +53,21 @@ const DesktopLogin = () => {
             const resultAction = await dispatch(signInUser(data))
             if (signInUser.fulfilled.match(resultAction)) {
                 setLoader(false)
-                await  dispatch(getPersonalStore())
-                return router.push('/my-store')
+                var response = await dispatch(getPersonalStore())
+                if (getPersonalStore.fulfilled.match(response)) {
+                    var bb = localStorage.getItem('checking')
+                    if (bb === 'true') {
+                        return router.push('/cart')
+                    } 
+                    if (response.payload?.length > 0) {
+                        localStorage.setItem('activeId', response.payload[0]?.id)
+                        localStorage.setItem('activeName', response.payload[0]?.brandName)
+                        return router.push('/my-store')
+                    }
+                    else {
+                        return router.push('/')
+                    }
+                }
             } else {
                 if (resultAction.payload) {
                     setLoader(false)
@@ -85,8 +99,21 @@ const DesktopLogin = () => {
             var resultAction = await dispatch(oauthLogin(payload))
             if (oauthLogin.fulfilled.match(resultAction)) {
                 setLoader(false)
-                await  dispatch(getPersonalStore())
-                return router.push('/my-store')
+                var respons = await dispatch(getPersonalStore())
+                if (getPersonalStore.fulfilled.match(respons)) {
+                    var bb = localStorage.getItem('checking')
+                    if (bb === 'true') {
+                        return router.push('/cart')
+                    } 
+                    if (respons.payload?.length > 0) {
+                        localStorage.setItem('activeId', respons.payload[0]?.id)
+                        localStorage.setItem('activeName', respons.payload[0]?.brandName)
+                        return router.push('/my-store')
+                    }
+                    else {
+                        return router.push('/')
+                    }
+                }
             } else {
                 if (resultAction.payload) {
                     setLoader(false)
@@ -119,11 +146,16 @@ const DesktopLogin = () => {
 
     return (
         <>
-            <View>
+           <RowBetween>
+           <View onClick={() => router.push('/')}>
                 <IconImage
                     src={logo}
                 />
             </View>
+           <Wid>
+           <Button children='Become a Seller' handlePress={() => router.push('/merchant')} />
+           </Wid>
+           </RowBetween>
             <ContainerDiv>
                 <CenterContainer>
                     <Div>
@@ -220,9 +252,9 @@ const DesktopLogin = () => {
                 </CenterContainer>
             </ContainerDiv>
             <BottomContainer>
-                 <ViewDiv onClick={() => router.push('/merchant')}>
-                            <Paragraph text='Want to sell on Bazara? ' fontSize={GlobalStyle.size.size14} fontWeight='400' />
-                            <Paragraph text='Create a Store' margin='0% 4px' color={GlobalStyle.color.bazaraTint} fontSize={GlobalStyle.size.size14} fontWeight='400' />
+                        <ViewDiv onClick={() => router.push('/signup')}>
+                            <Paragraph text='Just a buyer? ' fontSize={GlobalStyle.size.size14} fontWeight='400' />
+                            <Paragraph text='Create your Account' margin='0% 6px' color={GlobalStyle.color.bazaraTint} fontSize={GlobalStyle.size.size14} fontWeight='400' />
                         </ViewDiv>
             </BottomContainer>
 
@@ -271,4 +303,9 @@ const Subdiv = styled.div`
  border: 1px solid ${GlobalStyle.color.darkBlack};
  border-radius: 5px;
  padding: 15px;
+`
+
+const Wid = styled.div`
+    width: 150px;
+    margin-right: 20px;
 `

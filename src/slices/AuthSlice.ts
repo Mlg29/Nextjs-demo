@@ -17,9 +17,9 @@ const initialState: LoginState = {
 export const createUser = createAsyncThunk(
   'auth/signUp',
   async (payload: SignupType) => {
-    const response = await postAuthRequest("/auth/regUser", payload)
+    const response = await postAuthRequest("/auth", payload)
     if (response?.status === 200) {
-      localStorage.setItem('token', response?.data?.token)
+      localStorage.setItem('token', response?.data?.data?.accessToken)
     }
 
   }
@@ -58,7 +58,7 @@ export const signInUser = createAsyncThunk(
   async (payload: LoginFormData) => {
     const response = await postAuthRequest("/auth/login", payload)
     if (response?.status === 200) {
-      localStorage.setItem('token', response?.data?.token)
+      localStorage.setItem('token', response?.data?.data?.accessToken)
     }
 
   }

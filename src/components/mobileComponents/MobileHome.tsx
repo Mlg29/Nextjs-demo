@@ -16,6 +16,7 @@ import ImageContainer from '../Image'
 import { categoryData, getAllCategories } from '../../slices/CategorySlice'
 import * as CurrencyFormat from 'react-currency-format';
 import BuyerTabs from './reusable/BuyerTabs'
+import ProductContainer from '../ProductContainer'
 
 function MobileHome() {
     const router = useRouter()
@@ -73,44 +74,19 @@ function MobileHome() {
     };
 
 
-    const Dummy = [
-        {
-            id: 0,
-            name: "Women's Clothing",
-            image: "https://res.cloudinary.com/doouwbecx/image/upload/v1659633074/2_eyvshq.png",
-            price: "3000"
-          },
-          {
-            id: 1,
-            name:  "Men's Clothing",
-            image: "https://res.cloudinary.com/doouwbecx/image/upload/v1659633074/1_ktfkhp.png",
-            price: "2500"
-          },
-          {
-            id: 2,
-            name:  "Jewelry, Wristwatch & Glasses",
-            image: "https://res.cloudinary.com/doouwbecx/image/upload/v1659633074/5_yyfdvq.png",
-            price: "3000"
-          },
-          {
-            id: 3,
-            name: "Hair & Wigs",
-            image: "https://res.cloudinary.com/doouwbecx/image/upload/v1659633074/2_eyvshq.png",
-            price: "3000"
-          },
-    ]
 
     return (
         <Container>
             <HomeHeader data={profileData} />
             <Div>
                 <Slider {...settings}>
-                    <SliderDiv>
+                  <MinDiv>
+                  <SliderDiv>
                         <Subdiv>
                             <TagDiv>
                                 <Paragraph text='Flash sale' textAlign='center' textTransform='uppercase' fontSize={GlobalStyle.size.size10} />
                             </TagDiv>
-                            <Paragraph text='Hot sale' textTransform='uppercase' fontSize={GlobalStyle.size.size12} margin='0px 0px 5px 0px' />
+                            <Paragraph text='Hot sale' textTransform='uppercase' fontSize={GlobalStyle.size.size12} margin='0px 0px 3px 0px' />
                             <RowStart>
                                 <Paragraph text={'40%'} textTransform='uppercase' color={GlobalStyle.color.white} fontWeight='bold' fontSize={GlobalStyle.size.size22} margin='0px 5px 2px 0px' />
                                 <Paragraph text={'OFF WHEN'} textTransform='uppercase' fontSize={GlobalStyle.size.size12} margin='0px 0px 2px 0px' />
@@ -127,6 +103,7 @@ function MobileHome() {
                         </Subdiv>
 
                     </SliderDiv>
+                  </MinDiv>
                     <SliderDiv2>
                         <Subdiv>
                             <TagDiv>
@@ -175,13 +152,15 @@ function MobileHome() {
 
             <RowBetween>
                 <Paragraph text='Categories' fontSize={GlobalStyle.size.size16} fontWeight='600' />
-                <Paragraph text='See all' color={GlobalStyle.color.bazaraTint} fontSize={GlobalStyle.size.size16} fontWeight='600' />
+               <div onClick={() => router.push(`/category/all`)}>
+               <Paragraph text='See all' color={GlobalStyle.color.bazaraTint} fontSize={GlobalStyle.size.size16} fontWeight='600' />
+               </div>
             </RowBetween>
 
             <Slick {...categorySettings}>
                 {
                     categoryDisplay?.map(data => {
-                        return <CategoryDiv>
+                        return <CategoryDiv  onClick={() => router.push(`/category/${data?.name}`)}>
                             <CatDiv>
                                 <ImageContainer type='round' source={data?.image} width={50} height={50} />
                                 <Paragraph text={data?.name?.length > 15 ? `${data?.name.substring(0, 15)}...` : data?.name} fontSize={GlobalStyle.size.size10} textAlign='center' margin='4px 0px 0px 0px' />
@@ -194,19 +173,15 @@ function MobileHome() {
             <br/>
             <RowBetween>
                 <Paragraph text='Top Selling Products' fontSize={GlobalStyle.size.size16} fontWeight='600' />
-                <Paragraph text='See all' color={GlobalStyle.color.bazaraTint} fontSize={GlobalStyle.size.size16} fontWeight='600' />
+                <div onClick={() => router.push('/see-all/all')}>
+               <Paragraph text='See all' color={GlobalStyle.color.bazaraTint} fontSize={GlobalStyle.size.size16} fontWeight='600' />
+               </div>
             </RowBetween>
             <Paragraph text='All Categories' fontSize={GlobalStyle.size.size12} fontWeight='400' />
             <SlickProduct {...productSettings}>
                 {
-                    Dummy?.map(data => {
-                        return <ProductDiv>
-                            <ProdDiv>
-                                <ImageContainer source={data?.image} width={150} height={150} />
-                                <Paragraph text={data?.name?.length > 15 ? `${data?.name.substring(0, 15)}...` : data?.name} fontSize={GlobalStyle.size.size10} margin='4px 0px 0px 0px' />
-                                <CurrencyFormat value={data?.price} displayType={'text'} thousandSeparator={true} prefix={'₦'} renderText={value => <Paragraph text={`${value}`} fontSize={GlobalStyle.size.size14} color={GlobalStyle.color.accent} fontWeight='700' />} />
-                            </ProdDiv>
-                        </ProductDiv>
+                    categoryDisplay?.map(data => {
+                        return <ProductContainer data={data}  mini={true} />
                     })
                 }
             </SlickProduct>
@@ -224,12 +199,16 @@ function MobileHome() {
 export default MobileHome
 
 const Div = styled.div`
-    margin-top: 20px;
+    margin: 20px 0px;
+
+`
+const MinDiv = styled.div`
+    background: ${GlobalStyle.color.purple}
 
 `
 const SliderDiv = styled.div`
     width: 100%;
-    height: 200px;
+    height: 150px;
     background-image: url('https://res.cloudinary.com/doouwbecx/image/upload/v1659529722/gb_znpphu.svg');
     background-size: cover;
 
@@ -237,14 +216,14 @@ const SliderDiv = styled.div`
 
 const SliderDiv2 = styled.div`
     width: 100%;
-    height: 170px;
+    height: 150px;
     background-image: url('https://res.cloudinary.com/doouwbecx/image/upload/v1634583567/image_9_rsrovg.png');
     background-size: cover;
 
 `
 const SliderDiv3 = styled.div`
     width: 100%;
-    height: 170px;
+    height: 150px;
     background-image: url('https://res.cloudinary.com/doouwbecx/image/upload/v1636636130/Hero_Slide_2_fuzclf.png');
     background-size: cover;
 
@@ -278,14 +257,14 @@ height: 7px;
 border-radius: 50%;
 `
 const Subdiv = styled.div`
-    padding: 20px 10px 10px 20px;
+    padding: 10px 20px 10px 20px;
 `
 const TagDiv = styled.div`
     background: ${GlobalStyle.color.darkBlack};
     width: 65px;
     padding: 5px;
     border-radius: 3px;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
 `
 
 const CategoryDiv = styled.div`

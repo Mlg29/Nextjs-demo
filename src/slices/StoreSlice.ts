@@ -21,7 +21,7 @@ const initialState: StoreState = {
 export const createStore = createAsyncThunk(
     'store/createStore',
     async (payload: StoreCreateFormData) => {
-        const response = await postRequest("/sidehustle/account/create", payload)
+        const response = await postRequest("/store/create", payload)
         if (response?.status === 200) {
             return response?.data?.data
         }
@@ -34,14 +34,14 @@ export const updateStore = createAsyncThunk(
         const payloadData = {
             brandName: payload.brandName,
             description: payload.description,
-            imgUrl: payload.imgUrl,
+            coverImg: payload.imgUrl,
             address: payload.address,
             phoneNumber: payload.phoneNumber,
             location: payload.location,
             isDraft: payload.isDraft,
             status: payload.status
         }
-        const response = await postRequest(`/sidehustle/account/${payload.id}/update`, payloadData)
+        const response = await postRequest(`/store/update/${payload.id}`, payloadData)
         if (response?.status === 200) {
             return response?.data?.data
         }
@@ -53,7 +53,7 @@ export const updateStore = createAsyncThunk(
 export const getPersonalStore = createAsyncThunk(
     'store/myStore',
     async () => {
-        const response = await getRequest("/sidehustle/account")
+        const response = await getRequest("/store/merchant")
 
         if (response?.status === 200) {
             return response?.data?.data
@@ -67,7 +67,17 @@ export const getPersonalStore = createAsyncThunk(
 export const getStoreById = createAsyncThunk(
     'store/getStoreById',
     async (payload: string) => {
-        const response = await getRequest(`/sidehustle/${payload}/details`)
+        const response = await getRequest(`/store/getById/${payload}`)
+        if (response?.status === 200) {
+            return response?.data?.data
+        }
+    }
+)
+
+export const deleteStoreById = createAsyncThunk(
+    'store/StoreById',
+    async (payload: string) => {
+        const response = await getRequest(`/store/delete/${payload}`)
         if (response?.status === 200) {
             return response?.data?.data
         }
@@ -78,7 +88,7 @@ export const getStoreById = createAsyncThunk(
 export const getAllStore = createAsyncThunk(
     'store/allStore',
     async () => {
-        const response = await getRequest("/sidehustle/category")
+        const response = await getRequest("/store/all")
         if (response?.status === 200) {
             return response?.data?.data
         }

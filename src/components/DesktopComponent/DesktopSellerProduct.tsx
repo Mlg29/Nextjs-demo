@@ -337,7 +337,7 @@ function DesktopSellerProduct() {
         price: data?.variants[0]?.spec[0]?.price,
         quantity: data?.variants[0]?.spec[0]?.quantity,
         status: data?.status,
-        image: data?.variants[0]?.variantImg[0],
+        image: Array.isArray(data?.variants[0]?.variantImg) ? data?.variants[0]?.variantImg[0] : data?.variants[0]?.variantImg,
         variants: data?.variants,
         ...data
       }

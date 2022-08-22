@@ -13,6 +13,7 @@ import * as CurrencyFormat from 'react-currency-format';
 
 
 const ProductVariantCard: React.FC<ProductVariantCardInterface> = ({image, name, price, edit,handleDeleteClick, handleEditClick}) => {
+
   return (
    <View>
         <RowStart>

@@ -53,6 +53,7 @@ const MobileEditStore = () => {
         state: storebyIdData?.location?.state
     };
 
+    console.log({storebyIdData})
 
     useEffect(() => {
         dispatch(getStoreById(activeId))

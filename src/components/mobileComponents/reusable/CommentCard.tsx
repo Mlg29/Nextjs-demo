@@ -1,6 +1,6 @@
 import { Rate, Avatar } from 'antd'
 import { useFormik } from 'formik'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { verti } from '../../../assets'
 import { RowBetween, RowStart } from '../../../utils/StyledComponent'
@@ -11,9 +11,17 @@ import TextInput from '../../TextInput'
 import { IconImage } from '../Styled'
 import * as yup from 'yup';
 import moment from 'moment'
+import {useAppDispatch} from "../../../app/hook"
+import { getProfile } from '../../../slices/ProfileSlice'
 
-function CommentCard({ image, name, comment, date, rate, id }) {
+function CommentCard({ image, name, comment, date, rate, id, productOwner }) {
     const [selected, setSelected] = useState('')
+    const dispatch = useAppDispatch()
+    const [userId, setUserId] = useState(null)
+
+    useEffect(() => {
+        dispatch(getProfile()).then(d => setUserId(d.payload._id))
+    }, [])
 
     const initialValues: { reply: string } = {
         reply: ''
@@ -56,9 +64,11 @@ function CommentCard({ image, name, comment, date, rate, id }) {
                     <Paragraph text={name} color={GlobalStyle.color.purple} />
                 </RowStart>
 
-                <IconImage
+                {
+                    userId === productOwner && <IconImage
                     src={verti}
                 />
+                }
             </RowBetween>
             <RowStart>
                 <Rate disabled allowHalf value={rate} style={{ fontSize: '10px' }} />
@@ -66,9 +76,12 @@ function CommentCard({ image, name, comment, date, rate, id }) {
                 <Paragraph text={moment(date).format("Do MMM YY")} fontSize={GlobalStyle.size.size8} margin='4px 0% 0% 0%' />
             </RowStart>
             <Paragraph fontSize={GlobalStyle.size.size12} margin='5px 0%' fontWeight='600' text={comment} />
-            <RowStart onClick={() => handleSelectChange(id)} style={{cursor: 'pointer'}}>
+           {
+            userId === productOwner && <RowStart onClick={() => handleSelectChange(id)} style={{cursor: 'pointer'}}>
                 <Paragraph text={'Reply'} fontSize={GlobalStyle.size.size12} fontWeight='600' color={GlobalStyle.color.purple} />
             </RowStart>
+           }
+           
             {
                 selected === id ? <InputDiv>
                     <TextInput

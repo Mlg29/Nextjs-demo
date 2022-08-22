@@ -58,7 +58,7 @@ const DesktopCreateStore = () => {
             brandName: data.storeName,
             description: data.description,
             phoneNumber: data.phoneNumber,
-            imgUrl: imageUrl,
+            coverImg: imageUrl,
             address: data.street + " " + data.city + " " + data.state,
             shippingFees: {
                 withinLocation: 1000,

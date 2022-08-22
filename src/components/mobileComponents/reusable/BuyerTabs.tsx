@@ -26,18 +26,18 @@ const BuyerTabs = () => {
             label: "Explore",
         },
         {
-            route: "/orders",
-            icon: pathName === "/orders" ? BuyerOrderActive : BuyerOrderInActive,
+            route: "/buyer-orders",
+            icon: pathName === "/buyer-orders" ? BuyerOrderActive : BuyerOrderInActive,
             label: "Orders",
         },
         {
-            route: "/inbox",
-            icon: pathName === "/inbox" ? BuyerChatActive : BuyerChatInActive,
+            route: "/buyer-chat",
+            icon: pathName === "/buyer-chat" ? BuyerChatActive : BuyerChatInActive,
             label: "Inbox",
         },
         {
-            route: "/profile",
-            icon: pathName === "/profile" ? BuyerProfileActive : BuyerProfileInActive,
+            route: "/buyer-profile",
+            icon: pathName === "/buyer-profile" ? BuyerProfileActive : BuyerProfileInActive,
             label: "Profile",
         },
     ];

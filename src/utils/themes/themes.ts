@@ -2,6 +2,7 @@
 
 export const GlobalStyle = {
     color: {
+        realBlack: "black",
         primaryBg: '#0D0D0D',
         bazaraTint: '#F80595',
         gray: '#9B9B9B',
@@ -29,7 +30,10 @@ export const GlobalStyle = {
         antdBlue: 'blue',
         antdGeekBlue: 'geekblue',
         antdPurple: 'purple',
-        accent: "#B5AFFF"
+        accent: "#B5AFFF",
+        gyd: "#AEAEAE",
+        darkPink: "#16112D",
+        prup: "#241D47"
     },
     size: {
         size8: "0.5em",
@@ -45,6 +49,8 @@ export const GlobalStyle = {
         size22: "1.3750em",
         size24: "1.5em",
         size25: '1.5625em',
-        size30: "1.875em"
+        size30: "1.875em",
+        size40: "2.5em",
+        size80: "5em"
     }
 }

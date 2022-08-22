@@ -64,7 +64,7 @@ const MobileProductColor = () => {
     const [dummyUploadImage, setDummyUploadImage] = useState([""])
     const getSlug = localStorage.getItem('slug')
     const [editSizeData, setEditSizeData] = useState<{ price: number, size: string }>({ price: 0, size: 'Select new Size' })
-    const [modalQuantity, setModalQuantity] = useState(0)
+    const [modalQuantity, setModalQuantity] = useState(1)
     const [editDataId, setEditDataId] = useState('')
 
 
@@ -72,18 +72,26 @@ const MobileProductColor = () => {
         dispatch(getProductBySlug(getSlug))
     }, [getSlug])
 
+    console.log({multipleUpload, dummyUploadImage})
+
     useEffect(() => {
         const loadData = () => {
             const editableProduct = productSlug?.variants?.find(data => data?._id === editableItem)
 
-            setMultipleUpload(editableProduct ? editableProduct?.variantImg : [])
-           
             setSizeList(editableProduct ? editableProduct?.spec : [])
             setQuantity(editableProduct ? editableProduct?.spec[0]?.quantity : 0)
             setPrice(editableProduct ? editableProduct?.spec[0]?.price : 0)
 
-            if(editableItem) {
-                setDummyUploadImage([...dummyUploadImage, ""])
+            if(multipleUpload?.length < 1) {
+                setMultipleUpload(editableProduct ? [...multipleUpload, editableProduct?.variantImg] : [])
+            }
+
+            if(editableItem && multipleUpload?.length === 0) {
+                return setDummyUploadImage(["", ""])
+            }
+
+            if(editableItem && multipleUpload?.length < 1) {
+                setDummyUploadImage([...dummyUploadImage, ""])   
             }
 
         }
@@ -156,12 +164,16 @@ const MobileProductColor = () => {
             await handleColorMulitplePublish(editablePayload)
         }
 
-        return router.push('/add-product')
+        
 
     }
 
 
     const handleModalFormSubmit = (db) => {
+        if(db.size === "Select new Size") {
+            return;
+        }
+
         if (editDataId !== '') {
             const newData = sizeList?.map(data => {
                 return data?._id === editDataId || data?.id === editDataId ? {
@@ -183,6 +195,8 @@ const MobileProductColor = () => {
             }])
         }
         handleCancel()
+        modalResetForm()
+        setModalQuantity(1)
 
     }
 
@@ -284,7 +298,7 @@ const MobileProductColor = () => {
         });
 
 
-    const { values: modalValues, errors: modalErrors, touched: modalTouched, handleChange: modalHandleChange, handleSubmit: modalHandleSubmit, handleBlur: modalHandleBlur } =
+    const { values: modalValues, errors: modalErrors, touched: modalTouched, handleChange: modalHandleChange, handleSubmit: modalHandleSubmit, handleBlur: modalHandleBlur, resetForm: modalResetForm } =
         useFormik({
             initialValues: modalInitialValues,
             validationSchema: ProductSizeSchema,
@@ -329,7 +343,7 @@ const MobileProductColor = () => {
 
     const modalDecrement = () => {
         if (modalQuantity === 1) {
-            return
+            return;
         }
         const qt = modalQuantity - 1
         setModalQuantity(qt)
@@ -559,6 +573,7 @@ const MobileProductColor = () => {
                 setQuantity(1)
                 dispatch(getProductBySlug(getSlug))
                 localStorage.removeItem('editableId')
+                return router.push('/add-product')
             }
             else {
                 setLoader(false)
@@ -709,15 +724,10 @@ const MobileProductColor = () => {
             await handleColorMulitplePublish(editablePayload)
         }
 
-
-
-
         await colorResetForm()
 
         setMultipleUpload([])
         setQuantity(1)
-
-        return router.push('/add-product')
 
     }
 
@@ -734,7 +744,7 @@ const MobileProductColor = () => {
                 <Paragraph text="Upload Images" fontSize={GlobalStyle.size.size16} fontWeight='400' />
 
                 {
-                    dummyUploadImage?.length <= 1 ? <MobileUpload profileImageChange={profileImageChange} />
+                    multipleUpload?.length < 1 ? <MobileUpload profileImageChange={profileImageChange} />
                         :
                         <Grid>
                             {
@@ -913,10 +923,10 @@ const MobileProductColor = () => {
                         onChange={modalHandleChange('size')}
                         errorMsg={modalTouched.size ? modalErrors.size : undefined}
                     />
-
+                    <MiniS></MiniS>
                     <NumberInput
                         label='Price'
-                        type='controlled'
+                        type='numb'
                         value={modalValues.price}
                         onChange={modalHandleChange('price')}
                         errorMsg={modalTouched.price ? modalErrors.price : undefined}
@@ -1005,9 +1015,6 @@ const Break = styled(Divider)`
     margin: 10px 0% !important;
 `
 
-const Contain = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+const MiniS = styled.div`
+   height: 8px;
 `

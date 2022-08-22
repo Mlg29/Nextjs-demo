@@ -121,11 +121,11 @@ function MobileProductDetail() {
                     </View>
 
                     <Paragraph text='Colours' fontSize={GlobalStyle.size.size14} fontFamily='400' />
-
                     <Subdiv>
                         {
                             productBySlugData?.variants?.map((data, i) => {
-                                return <ProductVariantCard key={i} name={productBySlugData?.name} price={data?.spec[0]?.price} image={data.variantImg?.length > 0 ? data.variantImg[0] : data.variantImg} />
+                                console.log({data})
+                                return <ProductVariantCard key={i} name={productBySlugData?.name} price={data?.spec[0]?.price} image={Array.isArray(data?.variantImg) ? data.variantImg[0] : data.variantImg} />
                             })
                         }
                     </Subdiv>

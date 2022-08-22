@@ -124,6 +124,7 @@ function MobileRating() {
                             date={data?.createdAt} 
                             rate={data?.rating}
                             id={data?._id}
+                            productOwner={data?.productOwner}
                         />
                 })
             }

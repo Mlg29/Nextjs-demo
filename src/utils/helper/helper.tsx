@@ -58,6 +58,10 @@ export const postRequest = (url: string, payload) => {
   })
 }
 
+export const deleteRequest = (url: string, payload) => {
+  return axios.delete(config.databaseUrl2 + url, payload)
+}
+
 
 export const uploadImageFunc = (payload) => {
   return axios.post(config.databaseUpload, payload, {

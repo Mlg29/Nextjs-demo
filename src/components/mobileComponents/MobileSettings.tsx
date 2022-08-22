@@ -15,8 +15,9 @@ import { Switch } from 'antd'
 import { useAppDispatch, useAppSelector } from '../../app/hook'
 import { getPersonalStore, getStoreById, myStore, storebyId, updateStore } from '../../slices/StoreSlice'
 import ResponseModal from '../Modal/ResponseModal'
-import { getAssignedStoresRole, storeRolesList } from '../../slices/StaffSlice'
+import { getAssignedStoresRole, getRoles, storeRolesList } from '../../slices/StaffSlice'
 import ImageContainer from '../Image'
+import { toast, ToastContainer } from 'material-react-toastify'
 
 function MobileSettings() {
   const router = useRouter();
@@ -25,6 +26,7 @@ function MobileSettings() {
   const storeInfo = useAppSelector(storebyId)
   const myStoreData = useAppSelector(myStore)
   const activeId = localStorage.getItem('activeId')
+  const mode = localStorage.getItem('mode')
   const myStoreRoles = useAppSelector(storeRolesList)
 
   const allStore = myStoreRoles?.map(data => {
@@ -48,6 +50,8 @@ function MobileSettings() {
 
   const ActiveStores = storeAddedTo?.concat(allStore)
 
+  console.log({ActiveStores, allStore, storeAddedTo, myStoreRoles})
+
   const [checked, setChecked] = useState<string>(storeInfo?.status)
 
   const [visible, setVisible] = useState(false)
@@ -64,6 +68,7 @@ function MobileSettings() {
     setChecked(storeInfo?.status)
     dispatch(getPersonalStore())
     dispatch(getAssignedStoresRole())
+    dispatch(getRoles())
   }, [activeId])
 
   // useEffect(() => {
@@ -157,6 +162,7 @@ function MobileSettings() {
     localStorage.removeItem('activeId')
     localStorage.removeItem('activeName')
     localStorage.removeItem('role')
+    localStorage.removeItem('mode')
     return router.push('/')
   }
 
@@ -169,6 +175,21 @@ function MobileSettings() {
     dispatch(getPersonalStore())
     dispatch(getAssignedStoresRole())
 
+    toast.success(`You are switching over to ${item?.brandName} store `)
+ 
+    setTimeout(() => {
+      return router.push('/my-store')
+    }, 2000)
+  }
+
+  const changeMode = (item) => {
+    localStorage.setItem('mode', item)
+    if(item === "Buyer") {
+      return router.push('/')
+    }
+    else {
+      return router.push('/my-store')
+    }
   }
 
 
@@ -211,7 +232,7 @@ function MobileSettings() {
                   {
                     data?.id === activeId && <ImageContainer width={20} height={20} type="round" source="https://res.cloudinary.com/doouwbecx/image/upload/v1659439185/Group_10652_tia6rl.png" />
                   }
-                 
+
                 </RowBetween>
               </Listdiv>
 
@@ -220,7 +241,7 @@ function MobileSettings() {
         }
         {
           ActiveStores?.filter((n) => n)?.length < 3 && <div onClick={() => router.push('/create-store')}>
-             <Paragraph text="+ Add another store" color={GlobalStyle.color.bazaraTint} margin='3px 0px 0px 0px' />
+            <Paragraph text="+ Add another store" color={GlobalStyle.color.bazaraTint} margin='3px 0px 0px 0px' />
           </div>
         }
       </Subdiv>
@@ -229,10 +250,18 @@ function MobileSettings() {
         <Switch onChange={onChange} defaultChecked={checked === 'active' ? true : false} className='switched' />
       </RowBetween>
       <br />
-      <RowBetween>
-        <Paragraph text='Switch to Buyer' fontSize={GlobalStyle.size.size14} fontWeight='400' />
-        <Switch defaultChecked={false} className='switched' />
-      </RowBetween>
+      {
+        mode === "Buyer" ? <RowBetween>
+          <Paragraph text='Switch to Seller' fontSize={GlobalStyle.size.size14} fontWeight='400' />
+          <Switch onChange={() => changeMode("Seller")} className='switched' />
+        </RowBetween>
+          :
+          <RowBetween>
+            <Paragraph text='Switch to Buyer' fontSize={GlobalStyle.size.size14} fontWeight='400' />
+            <Switch onChange={() => changeMode("Buyer")} className='switched' />
+          </RowBetween>
+      }
+
       <MobileTabs />
 
       <ResponseModal
@@ -242,6 +271,8 @@ function MobileSettings() {
         setModalVisible={handleModalClose}
         handlePress={handleModalClose}
       />
+      <ToastContainer />
+   
     </Container>
   )
 }

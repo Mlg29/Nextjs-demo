@@ -55,6 +55,10 @@ const MobileLogin = () => {
                 setLoader(false)
                 var response = await dispatch(getPersonalStore())
                 if (getPersonalStore.fulfilled.match(response)) {
+                    var bb = localStorage.getItem('checking')
+                    if (bb === 'true') {
+                        return router.push('/cart')
+                    } 
                     if (response.payload?.length > 0) {
                         localStorage.setItem('activeId', response.payload[0]?.id)
                         localStorage.setItem('activeName', response.payload[0]?.brandName)
@@ -97,6 +101,10 @@ const MobileLogin = () => {
                 setLoader(false)
                 var responseD = await dispatch(getPersonalStore())
                 if (getPersonalStore.fulfilled.match(response)) {
+                    var bb = localStorage.getItem('checking')
+                    if (bb === 'true') {
+                        return router.push('/cart')
+                    } 
                     if (responseD.payload?.length > 0) {
                         localStorage.setItem('activeId', responseD.payload[0]?.id)
                         localStorage.setItem('activeName', responseD.payload[0]?.brandName)

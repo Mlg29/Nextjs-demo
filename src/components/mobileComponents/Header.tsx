@@ -14,10 +14,9 @@ import { GlobalStyle } from '../../utils/themes/themes';
 const MobileHeader: React.FC<Headers> = ({ icon, header }) => {
     const router = useRouter()
 
-
     return (
         <RowJustifyAlignBetween>
-            <Div onClick={() => router.back()}>
+            <Div onClick={router?.pathname === "/login" || router?.pathname === "/signup" || router?.pathname === "/merchant" ? () => router.push('/') : () => router.back()}>
                 <IconImage
                     src={icon}
                     width={24}

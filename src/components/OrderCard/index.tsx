@@ -34,7 +34,7 @@ const OrderCard = ({ image, name, size, key, price, delivery, orderId, status, h
                         <Paragraph margin="3px 0px" text={`Estimated Delivery: ${new Date(delivery).toDateString()}`} fontSize={GlobalStyle.size.size10} fontWeight='600' color={GlobalStyle.color.gray} />
                     </RowStart>
                     <RowStart>
-                        <Paragraph text={`Order ID - ${orderId?.substring(0, 15)}`} fontSize={GlobalStyle.size.size11} fontWeight='600' color={GlobalStyle.color.gray} />
+                        <Paragraph text={`Order ID - ${orderId?.substring(0, 15)}`} fontSize={GlobalStyle.size.size11} fontWeight='600' color={GlobalStyle.color.gray} margin="-8px 0%" />
                     </RowStart>
                 </Subdiv>
             </RowStartCard>

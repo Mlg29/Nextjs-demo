@@ -9,6 +9,9 @@ import ProfileReducer from "../slices/ProfileSlice"
 import NotificationReducer from "../slices/NotificationSlice";
 import StaffReducer from "../slices/StaffSlice"
 import CategoryReducer from "../slices/CategorySlice"
+import CartReducer from "../slices/CartSlice"
+import AddressReducer from "../slices/AddressSlice"
+
 
 const combinedReducer = combineReducers({
     auth: AuthReducer,
@@ -19,7 +22,9 @@ const combinedReducer = combineReducers({
     profiles: ProfileReducer,
     notifications: NotificationReducer,
     staff: StaffReducer,
-    category: CategoryReducer
+    category: CategoryReducer,
+    cart: CartReducer,
+    address: AddressReducer
 })
 
 const reducer = (state: ReturnType<typeof combinedReducer>, action: AnyAction) => {

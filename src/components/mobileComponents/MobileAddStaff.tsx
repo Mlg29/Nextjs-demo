@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { chevronLeft, good } from '../../assets'
 import { GlobalStyle } from '../../utils/themes/themes'
@@ -15,9 +15,9 @@ import { useFormik } from 'formik'
 import { AddStaffData } from '../../utils/types'
 import { AddStaffSchema } from '../../utils/schemas'
 import { toast, ToastContainer } from 'material-react-toastify';
-import {useAppDispatch} from "../../app/hook"
+import {useAppDispatch, useAppSelector} from "../../app/hook"
 import { useRouter } from 'next/router'
-import { addStaff } from '../../slices/StaffSlice'
+import { addStaff, getRoles, storeRolesList } from '../../slices/StaffSlice'
 
 
 const MobileAddStaff = () => {
@@ -25,7 +25,7 @@ const MobileAddStaff = () => {
   const [role, setRole] = useState('')
   const dispatch = useAppDispatch()
   const router = useRouter()
-
+  const userRoles = useAppSelector(storeRolesList)
   const initialValues: AddStaffData = {
       email: '',
       role: ''
@@ -33,32 +33,13 @@ const MobileAddStaff = () => {
 
   const id = localStorage.getItem("activeId")
 
+
+  useEffect(() => {
+    dispatch(getRoles())
+  }, [])
+
+
  
-
-  const handleAddStaff = async (data) => {
-    setLoading(true)
-    const paylaod = {
-        userEmail: data?.email,
-        role: data?.role,
-        storeId: id
-    }
-
-    try {
-        const response = await dispatch(addStaff(paylaod))
-        if(addStaff.fulfilled.match(response)) {
-            toast.success('Staff Added')
-            setLoading(false)
-            return router.push('/staff')
-        }
-        else {
-            setLoading(false)
-        }
-    }
-    catch(e) {
-        console.log({e})
-        setLoading(false)
-    }
-}
 
 
   
@@ -70,10 +51,45 @@ const MobileAddStaff = () => {
   });
 
 
-  const userRoleData = userRoles?.map(data => data?.role)
+  const roleId = userRoles?.find(data => data?.role === values.role)?.id
+
+  const userRoleData = userRoles?.map(data => {
+    return {
+      id: data?.id,
+      type: data?.role
+    }
+  })
+
+  const handleAddStaff = async (data) => {
+    setLoading(true)
+    const paylaod = {
+        email: data?.email,
+        roleId: roleId,
+        storeId: id
+    }
+
+    try {
+        const response = await dispatch(addStaff(paylaod))
+        if(addStaff.fulfilled.match(response)) {
+            toast.success('Staff Added')
+            setLoading(false)
+            // return router.push('/staff')
+        }
+        else {
+            setLoading(false)
+           // toast.error(response?.message)
+        }
+    }
+    catch(e) {
+        console.log({e})
+        setLoading(false)
+    }
+}
 
 
   const permissionData = userRoles?.find(data => data?.role === values?.role)?.permissions
+
+  console.log({userRoleData, userRoles, roleId})
 
 
   const handleRoleChange = (e) => {
@@ -101,6 +117,7 @@ const MobileAddStaff = () => {
 
         <SelectField
           placeholder='Staff role'
+          type
           value={values.role}
           data={userRoleData}
           onSearch={handleChange('role')}
@@ -108,7 +125,7 @@ const MobileAddStaff = () => {
           errorMsg={touched.role ? errors.role : undefined}
         />
 
-        <TextDiv>
+        {/* <TextDiv>
           <Paragraph text='View role permissions' color={GlobalStyle.color.bazaraTint} fontSize={GlobalStyle.size.size16} fontFamily='600' margin='3% 0%' />
         </TextDiv>
 
@@ -119,7 +136,7 @@ const MobileAddStaff = () => {
               <Paragraph key={i} text={data.permission} margin='0% 5px' />
             </View>
           })
-        }
+        } */}
       </ColumnContainer>
 
       <BottomContainer>

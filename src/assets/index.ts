@@ -37,7 +37,7 @@ export const minus: StaticImageData = require('../assets/minus.svg');
 export const landMark: StaticImageData = require('../assets/land.svg');
 export const deleteIcon: StaticImageData = require('../assets/delete.svg');
 export const dotIcon: StaticImageData = require('../assets/dot.svg');
-
+export const removeIcon: StaticImageData = require('../assets/remove.svg');
 export const delIcon: StaticImageData = require('../assets/del.svg');
 export const editIcon: StaticImageData = require('../assets/edit.svg');
 export const logo: StaticImageData = require('../assets/logos.svg');
@@ -94,6 +94,16 @@ export const BuyerOrderActive: StaticImageData = require('../assets/buy-a.svg');
 export const BuyerOrderInActive: StaticImageData = require('../assets/buy-oi.svg');
 export const BuyerChatActive: StaticImageData = require('../assets/buy-ca.svg');
 export const BuyerChatInActive: StaticImageData = require('../assets/buy-ci.svg');
+export const rate: StaticImageData = require('../assets/rate.svg');
+export const sliderLeft: StaticImageData = require('../assets/lef.svg');
+export const sliderRight: StaticImageData = require('../assets/gret.svg');
+export const cart: StaticImageData = require('../assets/cart.svg');
+
+export const ppSvg: StaticImageData = require('../assets/svg.svg');
+export const imageLogo: StaticImageData = require('../assets/img-logo.svg');
+
+
+
 
 
 

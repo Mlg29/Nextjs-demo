@@ -43,7 +43,7 @@ const DesktopSignup = () => {
     const initialValues: SignupFormData = {
         firstName: '',
         lastName: '',
-        phoneNumber: '',
+        // phoneNumber: '',
         email: '',
         password: '',
     };
@@ -62,7 +62,14 @@ const DesktopSignup = () => {
             const resultAction = await dispatch(createUser(payload))
             if (createUser.fulfilled.match(resultAction)) {
                 setLoader(false)
-                return router.push('/create-store')
+                var bb = localStorage.getItem('checking')
+                if (bb === 'true') {
+                    return router.push('/cart')
+                }
+                else {
+                    return router.push('/')
+                }
+
             } else {
                 if (resultAction.payload) {
                     setLoader(false)
@@ -94,7 +101,13 @@ const DesktopSignup = () => {
             var resultAction = await dispatch(oauthLogin(payload))
             if (oauthLogin.fulfilled.match(resultAction)) {
                 setLoader(false)
-                return router.push('/create-store')
+                var bb = localStorage.getItem('checking')
+                if (bb === 'true') {
+                    return router.push('/cart')
+                }
+                else {
+                    return router.push('/')
+                }
             } else {
                 if (resultAction.payload) {
                     setLoader(false)
@@ -137,9 +150,8 @@ const DesktopSignup = () => {
                 <CenterContainer>
 
                     <Div>
-                    <Subdiv>
-                    <Paragraph text='Get Started' fontSize={GlobalStyle.size.size18} fontWeight='700' textAlign='center' margin='0% 0% 4% 0%' />
-                        <RowStart>
+                        <Subdiv>
+                            <Paragraph text='Get Started' fontSize={GlobalStyle.size.size18} fontWeight='700' textAlign='center' margin='0% 0% 4% 0%' />
                             <TextInput
                                 label='First Name'
                                 required
@@ -147,7 +159,7 @@ const DesktopSignup = () => {
                                 onChange={handleChange('firstName')}
                                 errorMsg={touched.firstName ? errors.firstName : undefined}
                             />
-                            <MildDiv></MildDiv>
+                          
                             <TextInput
                                 label='Last Name'
                                 required
@@ -155,34 +167,31 @@ const DesktopSignup = () => {
                                 onChange={handleChange('lastName')}
                                 errorMsg={touched.lastName ? errors.lastName : undefined}
                             />
-                        </RowStart>
-                        <RowStart>
+                           <TextInput
+                                    label='Email'
+                                    required
+                                    value={values.email}
+                                    onChange={handleChange('email')}
+                                    errorMsg={touched.email ? errors.email : undefined}
+                                />
+                              
+                                {/* <TextInput
+                                    label='Phone Number'
+                                    required
+                                    value={values.phoneNumber}
+                                    onChange={handleChange('phoneNumber')}
+                                    errorMsg={touched.phoneNumber ? errors.phoneNumber : undefined}
+                                /> */}
                             <TextInput
-                                label='Email'
+                                label='Password'
                                 required
-                                value={values.email}
-                                onChange={handleChange('email')}
-                                errorMsg={touched.email ? errors.email : undefined}
+                                value={values.password}
+                                isPassword
+                                onChange={handleChange('password')}
+                                errorMsg={touched.password ? errors.password : undefined}
                             />
-                            <MildDiv></MildDiv>
-                            <TextInput
-                                label='Phone Number'
-                                required
-                                value={values.phoneNumber}
-                                onChange={handleChange('phoneNumber')}
-                                errorMsg={touched.phoneNumber ? errors.phoneNumber : undefined}
-                            />
-                        </RowStart>
-                        <TextInput
-                            label='Password'
-                            required
-                            value={values.password}
-                            isPassword
-                            onChange={handleChange('password')}
-                            errorMsg={touched.password ? errors.password : undefined}
-                        />
-                        <br />
-                        <Button isLoading={loader} children={"Create Account"} handlePress={handleSubmit} />
+                            <br />
+                            <Button isLoading={loader} children={"Create Account"} handlePress={handleSubmit} />
                         </Subdiv>
                         <DividerContainer>OR</DividerContainer>
                         <GoogleLogin

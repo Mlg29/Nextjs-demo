@@ -15,7 +15,7 @@ export type SignupType = {
     password: string;
     fName: string;
     lName: string;
-    mobile: string;
+    // mobile: string;
 
 }
 export type OauthAction = {
@@ -29,6 +29,19 @@ export type LoginState = {
     loading: boolean;
     error: any
 }
+
+export type CartState = {
+    carts: Array<any>;
+    loading: boolean;
+    error: any
+}
+
+export type AddressState = {
+    locations: Array<any>;
+    loading: boolean;
+    error: any
+}
+
 
 export type StoreState = {
     myStore: Array<any>,
@@ -62,8 +75,9 @@ export type TextProps = {
     fontSize?: string;
     textAlign?: 'left' | 'right' | 'center' | 'justify';
     color?: string;
-    lineHeight?: number;
+    lineHeight?: string;
     fontFamily?: string;
+    textDecoration?: 'none' | 'underline' | 'overline' | 'line-through' | 'underline overline';
     textTransform?: 'none' | 'capitalize' | 'uppercase' | 'lowercase' | 'initial' | 'inherit';
     fontWeight?:
     | 'normal'
@@ -83,7 +97,7 @@ export type TextProps = {
 export type SignupFormData = {
     firstName: string,
     lastName: string,
-    phoneNumber: string,
+    // phoneNumber: string,
     email: string,
     password: string
 }
@@ -114,6 +128,7 @@ export type HomeHeaderType = {
 export type CategoryState = {
     category: Array<any>,
     storeBySlug: any,
+    storeByCategory: any,
     error: any,
     loading: boolean
 }
@@ -140,7 +155,7 @@ export type LandmarkFormData = {
 export type StoreCreateFormData = {
     brandName: string,
     description: string,
-    imgUrl: string,
+    coverImg: string,
     address: string,
     phoneNumber: string,
     location: {
@@ -296,8 +311,15 @@ export type ProductSizeData = {
     size: string
 }
 
+export type DeliveryData = {
+    street: string;
+    state: string;
+    city: string
+}
+
 export type OrdersState = {
     sellerOrders: Array<any>,
+    buyerOrders: Array<any>,
     sellerOrderDetails: any,
     outOfStock: any,
     error: any;
@@ -353,6 +375,22 @@ export type ProfileFormData = {
     mobile: string
 }
 
+export type BuyerProfileFormData = {
+    lName: string,
+    fName: string,
+    email: string,
+    mobile: string,
+    gender: string
+}
+
+export type ProductContainerType = {
+    data: any,
+    name?: string,
+    mini: boolean,
+    slug?: string
+}
+
+
 export type ProfileState = {
     profile: any,
     loading: boolean,
@@ -394,7 +432,7 @@ export type MerchantFormData = {
     firstName: string,
     lastName: string,
     email: string,
-    mobile: string,
+    // mobile: string,
     password: string,
 }
 

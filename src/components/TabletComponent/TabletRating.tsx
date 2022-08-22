@@ -116,6 +116,7 @@ function TabletRating() {
             <Paragraph text={`All Comments`} fontSize={GlobalStyle.size.size16} fontWeight='600' />
             {
                 ratingComments?.map(data => {
+                    console.log({data})
                     return <CommentCard
                         image={data?.imgUrls[0]}
                         name={data?.client?.fName + " " + data?.client?.lName}
@@ -123,6 +124,8 @@ function TabletRating() {
                         date={data?.createdAt}
                         rate={data?.rating}
                         id={data?._id}
+                        productOwner={data?.productOwner}
+                        
                     />
                 })
             }
@@ -156,6 +159,7 @@ const Button = styled.button`
     border-radius: 15px;
     border: none;
     margin-top: 10px;
+    color: ${GlobalStyle.color.black}
 `
 
 const RowDiv = styled.div`

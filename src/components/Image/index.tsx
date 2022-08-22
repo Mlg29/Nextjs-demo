@@ -12,6 +12,12 @@ const ImageContainer: React.FC<ImageType> = ({ source, width, height, type }) =>
           height={height}
         />
           :
+          type === 'square' ? <SquareImage
+          src={source}
+          width={width}
+          height={height}
+        />
+        :
           <Image
             src={source}
             width={width}
@@ -30,6 +36,11 @@ export default ImageContainer
 const RoundImage = styled.img`
     border-radius: 50%;
 `
+
+const SquareImage = styled.img`
+    border-radius: 10px;
+`
+
 
 const Image = styled.img`
 border-radius: 5px;

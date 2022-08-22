@@ -151,7 +151,7 @@ const MobileAddProduct = () => {
 
     const renderColorVariety = () => {
         return productVar?.map((data, i) => {
-            return <ProductVariantCard key={i} edit={true} handleDeleteClick={() => removeVariant(i)} handleEditClick={() => editVariant({data, i})} image={data?.variantImg[0]} name={productSlug?.name} price={data?.spec[0]?.price} />
+            return <ProductVariantCard key={i} edit={true} handleDeleteClick={() => removeVariant(i)} handleEditClick={() => editVariant({data, i})} image={data?.variantImg?.length > 0 ?data?.variantImg[0] : data?.variantImg} name={productSlug?.name} price={data?.spec[0]?.price} />
         })
 
     }

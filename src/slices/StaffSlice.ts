@@ -19,8 +19,17 @@ const initialState: StaffState = {
 export const getStaff = createAsyncThunk(
     'staff/getStaff',
     async (payload: string) => {
-        const response = await getRequest(`/sidehustle/getStoreUsers?storeId=${payload}`)
-        console.log({response})
+        // const response = await getRequest(`/role`)
+        // if (response?.status === 200) {
+        //     return response?.data?.data
+        // }
+    }
+)
+
+export const getRoles = createAsyncThunk(
+    'staff/getRoles',
+    async () => {
+        const response = await getRequest(`/role`)
         if (response?.status === 200) {
             return response?.data?.data
         }
@@ -39,11 +48,12 @@ export const getAssignedStoresRole = createAsyncThunk(
 
 export const addStaff = createAsyncThunk(
     'staff/addStaff',
-    async (payload: {userEmail: string, role: string, storeId: string}) => {
-        const response = await postRequest(`/sidehustle/addUserToStore`, payload)
-        // if (response?.status === 200) {
-        //     return response?.data?.data
-        // }
+    async (payload: {email: string, roleId: string, storeId: string}) => {
+        const response = await postRequest(`/storeRole/create`, payload)
+        if (response?.status === 200) {
+            return response?.data?.data
+        }
+        return response
     }
 )
 
@@ -77,6 +87,17 @@ export const StaffSlice = createSlice({
         builder.addCase(getAssignedStoresRole.rejected, (state, action) => {
             state.loading = false,
             state.error = action.error.message
+        })
+        builder.addCase(getRoles.pending, (state, action) => {
+            state.loading = true
+        }),
+            builder.addCase(getRoles.fulfilled, (state, action: PayloadAction<any>) => {
+                state.loading = false,
+                    state.storeRoles= action.payload
+            })
+        builder.addCase(getRoles.rejected, (state, action) => {
+            state.loading = false,
+            state.error = action.error.message
         }),
         builder.addCase(addStaff.pending, (state, action) => {
             state.loading = true
@@ -86,8 +107,9 @@ export const StaffSlice = createSlice({
                  
             })
         builder.addCase(addStaff.rejected, (state, action) => {
+            console.log({action, state})
             state.loading = false,
-            state.error = action.error.message
+            state.error = action
         })
 
     }

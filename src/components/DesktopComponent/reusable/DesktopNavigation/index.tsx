@@ -22,10 +22,15 @@ const DesktopNavigation = () => {
   const router = useRouter()
   const sellerNotificationStats = useAppSelector(sellerNotificationStat)
 
-  const onChange = async (checked: boolean) => {
-
-  };
-
+  const changeMode = (item) => {
+    localStorage.setItem('mode', item)
+    if(item === "Buyer") {
+      return router.push('/')
+    }
+    else {
+      return router.push('/my-store')
+    }
+  }
 
   useEffect(() => {
     dispatch(getProfile())
@@ -36,6 +41,7 @@ const DesktopNavigation = () => {
     localStorage.removeItem('activeId')
     localStorage.removeItem('activeName')
     localStorage.removeItem('role')
+    localStorage.removeItem('mode')
     return router.push('/')
   }
 
@@ -56,7 +62,7 @@ const DesktopNavigation = () => {
 
   useEffect(() => {
     dispatch(getSellerNotificationStat())
-  })
+  }, [])
 
   const isNotificationAvailable = sellerNotificationStats?.pendingOrders?.count > 0 || sellerNotificationStats?.completedOrders?.count > 0 || sellerNotificationStats?.productsOutOfStock?.count > 0 || sellerNotificationStats?.paymentReceived?.count > 0 
 
@@ -103,7 +109,7 @@ const DesktopNavigation = () => {
           <Div>
             <>
               <Paragraph text='Switch to Buyer’s mode' fontSize={GlobalStyle.size.size14} fontFamily="600" margin='0% 2%' />
-              <Switch onChange={onChange} defaultChecked={true} className='switched' />
+              <Switch onChange={() => changeMode("Buyer")} className='switched' />
             </>
             <BellDiv>
               <Dropdown overlay={submenu()} trigger={['click']}>

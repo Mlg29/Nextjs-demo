@@ -69,11 +69,11 @@ a {
   text-decoration: none !important;
 }
 .slick-slider .slick-list, .slick-slider .slick-track {
-  /* margin-left: -42px; */
+ 
   display: flex !important;
 }
 .anticon svg {
-  /* color: white !important; */
+ 
 }
 .ant-progress-success-bg, .ant-progress-bg {
   height: 10px !important;
@@ -103,10 +103,16 @@ thead > tr > th {
   background-color: #171717 !important;
   padding: 10px !important;
 }
+.ant-breadcrumb-separator {
+  color: white !important;
+}
 .ant-tag-orange {
   background-color: transparent !important;
 }
 .ant-tag-purple {
+  background-color: transparent !important;
+}
+.ant-tag-blue {
   background-color: transparent !important;
 }
 .ant-tag-geekblue {
@@ -286,10 +292,27 @@ textarea {
   overflow: hidden;
   display: inline-block;
 }
+
+.upload-btn-wrapper2 {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  width: 300px;
+}
 .ant-input-number:hover {
   border-color: #202020 !important;
 }
 .upload-btn-wrapper input[type="file"] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+.my-anchor-css-class {
+  color: #F80595 !important;
+}
+.upload-btn-wrapper2 input[type="file"] {
   font-size: 100px;
   position: absolute;
   left: 0;

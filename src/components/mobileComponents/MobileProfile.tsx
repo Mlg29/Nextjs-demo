@@ -58,6 +58,7 @@ const MobileProfile = () => {
     loadImage()
   }, [profileData])
 
+ 
 
   const profileImageChange = async (fileChange) => {
     const file = fileChange.target.files[0];

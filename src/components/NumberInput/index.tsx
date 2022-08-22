@@ -41,7 +41,7 @@ const NumberInput: NextPage<NumberType> = ({ label, onChange, value, errorMsg, t
            <Div>
              <InputG>
               <InputText>{prefix}</InputText>
-              <Control aria-label="Amount (to the nearest dollar)" value={value} onChange={onChange} />
+              <Control aria-label="Amount (to the nearest dollar)" placeholder="Price" value={value} onChange={onChange} />
             </InputG>
            </Div>
             : <Input
@@ -102,6 +102,7 @@ const Control= styled(Form.Control)`
   border: none;
   height: 45px;
   color: white;
+  margin-left: -18px !important;
 
   :focus {
     background: transparent;

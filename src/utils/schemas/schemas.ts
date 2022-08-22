@@ -11,7 +11,7 @@ export const LoginSchema = yup.object().shape({
 export const SignupSchema = yup.object().shape({
   firstName: yup.string().required('First name is required'),
   lastName: yup.string().required('Last name is required'),
-  phoneNumber: yup.string().min(11, ({min}) => `Phone number must be at least ${min} length`).required('Phone is required'),
+  // phoneNumber: yup.string().min(11, ({min}) => `Phone number must be at least ${min} length`).required('Phone is required'),
   email: yup.string().email().required('Email is required'),
   password: yup
     .string()
@@ -22,7 +22,7 @@ export const SignupSchema = yup.object().shape({
 export const MerchantSchema = yup.object().shape({
   firstName: yup.string().required('First name is required'),
   lastName: yup.string().required('Last name is required'),
-  mobile: yup.string().min(11, ({min}) => `Phone number must be at least ${min} length`).required('Phone is required'),
+  // mobile: yup.string().min(11, ({min}) => `Phone number must be at least ${min} length`).required('Phone is required'),
   email: yup.string().email().required('Email is required'),
   password: yup
     .string()
@@ -82,11 +82,22 @@ export const EditProductSchema = yup.object().shape({
 export const ProductColorSchema = yup.object().shape({  
   description: yup.string().required('Color description is required')
  });
+
+ export const DeliverySchema = yup.object().shape({  
+  street: yup.string().required('Street is required'),
+  state: yup.string().required('State is required'),
+  city: yup.string().required('City is required')
+ });
  
 
 export const ProductNoColorSchema = yup.object().shape({  
   price: yup.number().min(500, ({min}) => `Price must be at least ${min}`).required('Price is required')
  });
+
+ export const PhoneSchema = yup.object().shape({  
+  mobile: yup.number().required('Phone number is required')
+ });
+
 
  export const ProductColorAloneSchema = yup.object().shape({  
   price: yup.number().min(500, ({min}) => `Price must be at least ${min}`).required('Price is required')
@@ -121,6 +132,14 @@ export const ProductSizeSchema = yup.object().shape({
   fName: yup.string().required('First name is required'),
   email: yup.string().email().required('Email is required'),
   mobile: yup.string().required('Phone number is required'),
+ })
+
+ export const BuyerProfileFormSchema = yup.object().shape({
+  lName: yup.string().required('Surname is required'),
+  fName: yup.string().required('First name is required'),
+  email: yup.string().email().required('Email is required'),
+  mobile: yup.string().required('Phone number is required'),
+  gender: yup.string().required('Gender is required'),
  })
 
  export const DesktopCreateProductSchema = yup.object().shape({

@@ -39,7 +39,7 @@ const MobileMerchantSignup = () => {
     const initialValues: SignupFormData = {
         firstName: '',
         lastName: '',
-        phoneNumber: '',
+        // phoneNumber: '',
         email: '',
         password: '',
     };
@@ -152,13 +152,13 @@ const MobileMerchantSignup = () => {
                     onChange={handleChange('email')}
                     errorMsg={touched.email ? errors.email : undefined}
                 />
-                <TextInput
+                {/* <TextInput
                     label='Phone Number'
                     required
                     value={values.phoneNumber}
                     onChange={handleChange('phoneNumber')}
                     errorMsg={touched.phoneNumber ? errors.phoneNumber : undefined}
-                />
+                /> */}
                 <TextInput
                     label='Password'
                     required

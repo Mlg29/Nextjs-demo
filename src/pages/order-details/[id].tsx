@@ -128,14 +128,14 @@ function OrderDetails() {
                         </RowStart>
 
                         <Div color={sellerOrderDetail?.orderInfo.status === 'pending' ? GlobalStyle.color.orange : sellerOrderDetail?.orderInfo.status === 'processing' ? GlobalStyle.color.pink : sellerOrderDetail?.orderInfo.status === 'dispatched' ? GlobalStyle.color.purple : sellerOrderDetail?.orderInfo.status === 'completed' ? GlobalStyle.color.green : GlobalStyle.color.red}>
-                            <Paragraph textTransform='capitalize' textAlign='center' text={statusUpdate} fontSize={GlobalStyle.size.size12} />
+                            <Paragraph textTransform='capitalize' textAlign='center' text={statusUpdate} fontSize={GlobalStyle.size.size14} />
                         </Div>
 
                         <View>
                             <RowStart>
                                 <ImageContainer source={sellerOrderDetail?.orderInfo?.variantImg} width={40} height={40} />
                                 <MinDiv>
-                                    <Paragraph text={sellerOrderDetail?.orderInfo?.name} fontSize={GlobalStyle.size.size12} fontWeight='600' />
+                                    <Paragraph text={sellerOrderDetail?.orderInfo?.name} fontSize={GlobalStyle.size.size14} fontWeight='600' />
                                     <Subdiv>
                                         <Paragraph text='Size -' fontSize={GlobalStyle.size.size10} fontWeight='400' />
                                         <Paragraph text={sellerOrderDetail?.orderInfo?.size} color={GlobalStyle.color.bazaraTint} margin='2px 0% 0% 5px' fontSize={GlobalStyle.size.size10} fontWeight='400' />
@@ -146,8 +146,8 @@ function OrderDetails() {
                             <RowAlignStart>
                                 <IconImage src={pin} />
                                 <MinDiv>
-                                    <Paragraph text='Delivery Details' fontSize={GlobalStyle.size.size12} fontWeight='600' color={GlobalStyle.color.gray} />
-                                    <Paragraph text={sellerOrderDetail?.deliveryInfo?.deliveryAddress} fontSize={GlobalStyle.size.size12} fontWeight='600' />
+                                    <Paragraph text='Delivery Details' fontSize={GlobalStyle.size.size14} fontWeight='600' color={GlobalStyle.color.gray} />
+                                    <Paragraph text={sellerOrderDetail?.deliveryInfo?.deliveryAddress} fontSize={GlobalStyle.size.size14} fontWeight='600' />
 
                                 </MinDiv>
                             </RowAlignStart>
@@ -155,8 +155,8 @@ function OrderDetails() {
                             <RowAlignStart>
                                 <IconImage src={calender} />
                                 <MinDiv>
-                                    <Paragraph text='Estimated Delivery Date' fontSize={GlobalStyle.size.size12} fontWeight='600' color={GlobalStyle.color.gray} />
-                                    <Paragraph text={new Date(sellerOrderDetail?.deliveryInfo?.expectedDeliveryDate).toDateString()} fontSize={GlobalStyle.size.size12} fontWeight='600' />
+                                    <Paragraph text='Estimated Delivery Date' fontSize={GlobalStyle.size.size14} fontWeight='600' color={GlobalStyle.color.gray} />
+                                    <Paragraph text={new Date(sellerOrderDetail?.deliveryInfo?.expectedDeliveryDate).toDateString()} fontSize={GlobalStyle.size.size14} fontWeight='600' />
 
                                 </MinDiv>
                             </RowAlignStart>
@@ -164,35 +164,35 @@ function OrderDetails() {
 
                         <View>
                             <RowBetween>
-                                <Paragraph text="Items Total" fontSize={GlobalStyle.size.size12} fontWeight='400' />
-                                <CurrencyFormat value={sellerOrderDetail?.orderInfo?.totalAmount} displayType={'text'} thousandSeparator={true} prefix={'₦'} renderText={value => <Paragraph text={value} fontSize={GlobalStyle.size.size12} fontWeight='600' />} />
+                                <Paragraph text="Items Total" color={GlobalStyle.color.gyd} fontSize={GlobalStyle.size.size14} fontWeight='400' />
+                                <CurrencyFormat value={sellerOrderDetail?.orderInfo?.totalAmount} displayType={'text'} thousandSeparator={true} prefix={'₦'} renderText={value => <Paragraph text={value} fontSize={GlobalStyle.size.size14} fontWeight='600' />} />
                             </RowBetween>
                             <Break></Break>
                             <RowBetween>
-                                <Paragraph text="Quantity" fontSize={GlobalStyle.size.size12} fontWeight='400' />
-                                <Paragraph text={sellerOrderDetail?.orderInfo?.quantity} fontSize={GlobalStyle.size.size12} fontWeight='600' />
+                                <Paragraph text="Quantity" color={GlobalStyle.color.gyd} fontSize={GlobalStyle.size.size14} fontWeight='400' />
+                                <Paragraph text={sellerOrderDetail?.orderInfo?.quantity} fontSize={GlobalStyle.size.size14} fontWeight='600' />
                             </RowBetween>
                             <Break></Break>
                             <RowBetween>
-                                <Paragraph text="Delivery Fee" fontSize={GlobalStyle.size.size12} fontWeight='400' />
-                                <Paragraph text="N/A" fontSize={GlobalStyle.size.size12} fontWeight='400' />
+                                <Paragraph text="Delivery Fee" color={GlobalStyle.color.gyd} fontSize={GlobalStyle.size.size14} fontWeight='400' />
+                                <Paragraph text="N/A" fontSize={GlobalStyle.size.size14} fontWeight='400' />
                             </RowBetween>
                         </View>
 
                         <View>
                             <RowBetween>
-                                <Paragraph text="Order ID" fontSize={GlobalStyle.size.size12} fontWeight='400' />
-                                <Paragraph text={sellerOrderDetail?.id} fontSize={GlobalStyle.size.size12} fontWeight='600' />
+                                <Paragraph text="Order ID" color={GlobalStyle.color.gyd} fontSize={GlobalStyle.size.size14} fontWeight='400' />
+                                <Paragraph text={sellerOrderDetail?.id} fontSize={GlobalStyle.size.size14} fontWeight='600' />
                             </RowBetween>
                             <Break></Break>
                             <RowBetween>
-                                <Paragraph text="Order Date" fontSize={GlobalStyle.size.size12} fontWeight='400' />
-                                <Paragraph text={new Date(sellerOrderDetail?.createdAt).toDateString()} fontSize={GlobalStyle.size.size12} fontWeight='600' />
+                                <Paragraph text="Order Date" color={GlobalStyle.color.gyd} fontSize={GlobalStyle.size.size14} fontWeight='400' />
+                                <Paragraph text={new Date(sellerOrderDetail?.createdAt).toDateString()} fontSize={GlobalStyle.size.size14} fontWeight='600' />
                             </RowBetween>
                             <Break></Break>
                             <RowBetween>
-                                <Paragraph text="Buyer’s Name" fontSize={GlobalStyle.size.size12} fontWeight='400' />
-                                <Paragraph text="N/A" fontSize={GlobalStyle.size.size12} fontWeight='400' />
+                                <Paragraph text="Buyer’s Name" color={GlobalStyle.color.gyd} fontSize={GlobalStyle.size.size14} fontWeight='400' />
+                                <Paragraph text="N/A" fontSize={GlobalStyle.size.size14} fontWeight='400' />
                             </RowBetween>
                         </View>
                         <Break></Break>
@@ -207,23 +207,23 @@ function OrderDetails() {
                         {
                             sellerOrderDetail?.orderInfo.status === "pending" || sellerOrderDetail?.orderInfo.status === 'processing' ?
                                 <RowBetween>
-                                    <Paragraph text='Message Buyer' />
+                                    <Paragraph text='Message Buyer' fontSize={GlobalStyle.size.size16} />
 
                                     {
                                         sellerOrderDetail?.orderInfo.status === 'pending' ?
                                             <Cont onClick={() => handleOrderModalOpen('reject')}>
-                                                <Paragraph text='Reject Order' color={GlobalStyle.color.red} />
+                                                <Paragraph text='Reject Order' color={GlobalStyle.color.red} fontSize={GlobalStyle.size.size16} />
                                             </Cont>
                                             : sellerOrderDetail?.orderInfo.status === 'processing' ?
                                                 <Cont onClick={() => handleOrderModalOpen('cancel')}>
-                                                    <Paragraph text='Cancel Order' color={GlobalStyle.color.red} />
+                                                    <Paragraph text='Cancel Order' color={GlobalStyle.color.red} fontSize={GlobalStyle.size.size16} />
                                                 </Cont>
                                                 : null
                                     }
                                 </RowBetween>
                                 :
                                 <ContDiv>
-                                    <Paragraph text='Message Buyer' />
+                                    <Paragraph text='Message Buyer' fontSize={GlobalStyle.size.size16} />
                                 </ContDiv>
                         }
 

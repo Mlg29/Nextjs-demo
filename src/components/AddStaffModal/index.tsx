@@ -37,8 +37,8 @@ function AddStaffModal({ staffModalVisible, closeModal }) {
     const handleAddStaff = async (data) => {
         setLoading(true)
         const paylaod = {
-            userEmail: data?.email,
-            role: data?.role,
+            email: data?.email,
+            roleId: data?.role,
             storeId: id
         }
 

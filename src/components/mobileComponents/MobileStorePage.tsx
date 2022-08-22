@@ -45,6 +45,7 @@ function MobileStorePage() {
     const [stateLoader, setStateLoader] = useState(false)
 
 
+  
 
     useEffect(() => {
         setStateLoader(true)
@@ -69,7 +70,7 @@ function MobileStorePage() {
         className: "slider variable-width",
         dots: false,
         infinite: false,
-        centerMode: true,
+        // centerMode: true,
         slidesToShow: 2,
         slidesToScroll: 1,
         variableWidth: true,
@@ -101,7 +102,6 @@ function MobileStorePage() {
 
     ]
 
-    console.log({staffList})
     return (
         <Container>
             <StoreHeader name={storebyIdData?.brandName} slug={storebyIdData?.slug} />
@@ -152,21 +152,21 @@ function MobileStorePage() {
                                                 <IconImage src={Bg} />
                                                 <Paragraph text='Product' fontSize={GlobalStyle.size.size16} margin='0% 0px 0% 15px' />
                                             </RowStart>
-                                            <Paragraph text={productList ? productList?.length : "0"} fontSize={GlobalStyle.size.size30} fontWeight='700' margin='0px 0px 0px 0px' />
+                                            <Paragraph text={productList ? productList?.length : "0"} fontSize={GlobalStyle.size.size30} fontWeight='700' margin='20px 0px 0px 0px' />
                                         </CardTwo>
                                         <CardTwo>
                                             <RowStart>
                                                 <IconImage src={bigProfile} />
                                                 <Paragraph text='Staff' fontSize={GlobalStyle.size.size16} margin='0% 0px 0% 15px' />
                                             </RowStart>
-                                            <Paragraph text={staffList ? staffList?.length : "0"} fontSize={GlobalStyle.size.size30} fontWeight='700' margin='0px 0px 0px 0px' />
+                                            <Paragraph text={staffList ? staffList?.length : "0"} fontSize={GlobalStyle.size.size30} fontWeight='700' margin='20px 0px 0px 0px' />
                                         </CardTwo>
                                         <CardTwo>
                                             <RowStart>
                                                 <IconImage src={ordd} />
                                                 <Paragraph text='Orders' fontSize={GlobalStyle.size.size16} margin='0% 0px 0% 15px' />
                                             </RowStart>
-                                            <Paragraph text={sellerOrderList ? sellerOrderList?.length : "0"} fontSize={GlobalStyle.size.size30} fontWeight='700' margin='0px 0px 0px 0px' />
+                                            <Paragraph text={sellerOrderList ? sellerOrderList?.length : "0"} fontSize={GlobalStyle.size.size30} fontWeight='700' margin='20px 0px 0px 0px' />
                                         </CardTwo>
 
                                     </SliderDiv>
@@ -277,7 +277,7 @@ const CardTwo = styled.div`
 
 `
 const SliderDiv = styled(Slider)`
-
+    width: 100% !important;
 `
 const BigDiv = styled.div`
 background: ${GlobalStyle.color.darkBlack};
@@ -297,5 +297,5 @@ const Div2 = styled.div`
 `
 
 const DivSlider = styled.div`
-margin: 4% 5% 4% -10em;
+ margin: 4% 0%;
 `
